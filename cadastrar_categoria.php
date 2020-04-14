@@ -1,3 +1,11 @@
 <?php 
-echo '<pre>';
-print_r($_POST);
+require 'classes/Categoria.php';
+require 'classes/CategoriaDAO.php';
+
+$categoria = new Categoria();
+$categoriaDAO = new CategoriaDAO();
+
+$categoria->setNome($_POST['nome']);
+
+$values = "null, '{$categoria->getNome()}'";
+$categoriaDAO->inserir($values);

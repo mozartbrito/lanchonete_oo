@@ -24,7 +24,8 @@ class Conexao
 			return $conn;
 			
 		} catch (PDOException $e) {
-			echo 'Erro na conexao. Código: ' . $e->getCode();
+			echo 'Erro na conexao. Erro reportado: ' . $e->getMessage();
+			exit;
 		}
     }
 }
