@@ -15,6 +15,6 @@ class CategoriaDAO extends Model
 
     public function alteraCategoria(Categoria $categoria) {
     	$values = "nome = '{$categoria->getNome()}'";
-    	$this->alterar($categoria->getId(), $values)
+    	$this->alterar($categoria->getId(), $values);
     }
 }
