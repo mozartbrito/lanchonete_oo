@@ -7,5 +7,9 @@ $categoriaDAO = new CategoriaDAO();
 
 $categoria->setNome($_POST['nome']);
 
-$values = "null, '{$categoria->getNome()}'";
-$categoriaDAO->inserir($values);
+$categoriaDAO->insereCategoria($categoria);
+
+$categorias = $categoriaDAO->listar();
+
+echo '<pre>';
+print_r($categorias);
