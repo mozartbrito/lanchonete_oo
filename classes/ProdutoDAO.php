@@ -13,9 +13,8 @@ class ProdutoDAO extends Model
     {
     	$values = "null, 
     				'{$produto->getNome()}',
-    				'{$produto->getPreco()}', 
-    				'{$produto->categoria->getId()}'";
-    	echo $values; exit;
+    				'{$produto->getPrecoBD()}', 
+    				'{$produto->getCategoria()->getId()}'";
     	return $this->inserir($values);
     }
 

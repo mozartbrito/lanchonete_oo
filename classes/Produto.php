@@ -53,6 +53,10 @@ class Produto
     {
         return number_format($this->preco, 2, ',','.');
     }
+
+    /**
+     * @return mixed
+     */
     public function getPrecoBD()
     {
         return $this->preco;
