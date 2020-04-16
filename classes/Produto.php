@@ -51,6 +51,10 @@ class Produto
      */
     public function getPreco()
     {
+        return number_format($this->preco, 2, ',','.');
+    }
+    public function getPrecoBD()
+    {
         return $this->preco;
     }
 
@@ -61,6 +65,9 @@ class Produto
      */
     public function setPreco($preco)
     {
+        $preco = str_replace('.', '', $preco);
+        $preco = str_replace(',', '.', $preco);
+
         $this->preco = $preco;
 
         return $this;

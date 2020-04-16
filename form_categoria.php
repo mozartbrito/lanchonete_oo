@@ -12,8 +12,14 @@
 
 ?>
 
+<div class="row" style="margin-top:40px">
+	<div class="col-6 offset-3">
+		<h2>Cadastrar categoria</h2>
+	</div>
+</div>
+
 <div class="row">
-	<div class="col">
+	<div class="col-6 offset-3">
 		<p>&nbsp;</p>
 		<form action="controle_categoria.php?acao=<?= ( $categoria->getId() != '' ? 'editar' : 'cadastrar' )?>" method="post">
 			<div class="form-group">
