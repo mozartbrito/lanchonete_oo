@@ -28,4 +28,16 @@ class UsuarioDAO extends Model
 
     	$this->alterar($usuario->getId(), $values);
     }
+
+    public function getLogin($email, $senha)
+    {
+    	$sql = "SELECT * FROM {$this->tabela} 
+                WHERE email = :email AND senha = :senha";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':senha', $senha);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+    	$stmt->execute();
+    	return $stmt->fetch();
+    }
 }

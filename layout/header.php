@@ -1,3 +1,4 @@
+<?php require_once 'includes/validacao.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
