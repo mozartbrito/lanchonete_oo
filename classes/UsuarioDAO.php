@@ -14,15 +14,18 @@ class UsuarioDAO extends Model
 
     public function insereUsuario(Usuario $usuario)
     {
-    	$values = "null, '{$usuario->getNome()}','{$usuario->getEmail()}', '{$usuario->getSenha()}'";
+    	$values = "null, '{$usuario->getNome()}','{$usuario->getEmail()}', '{$usuario->getSenha()}', '{$usuario->getImagem()}'";
     	return $this->inserir($values);
     }
     public function alteraUsuario(Usuario $usuario)
     {
     	$altera_senha = ($usuario->getSenha() != '' ? ", senha = '{$usuario->getSenha()}'" : '');
+        $altera_imagem = ($usuario->getImagem() != '' ? ", imagem = '{$usuario->getImagem()}'" : '');
+
     	$values = "
 			nome = '{$usuario->getNome()}'
 			, email = '{$usuario->getEmail()}'
+            {$altera_imagem}
 			{$altera_senha}
     	";
 

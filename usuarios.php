@@ -1,6 +1,9 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
 <?php 
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(__FILE__));
+$path = $_SERVER['DOCUMENT_ROOT'];
 
 require 'classes/Usuario.php';
 require 'classes/UsuarioDAO.php';
@@ -25,6 +28,7 @@ $usuarios = $usuarioDAO->listar();
 	<table class="table table-hover table-bordered table-striped">
 		<thead>
 			<tr>
+				<th></th>
 				<th>#ID</th>
 				<th>Nome</th>
 				<th>E-mail</th>
@@ -34,7 +38,10 @@ $usuarios = $usuarioDAO->listar();
 		<tbody>
 			<?php foreach($usuarios as $usuario){ ?>
 			<tr>
-				<td><?= $usuario->getId() ?></td>
+				<td class="text-center">
+					<img src="/assets/img/usuarios/<?= ($usuario->getImagem() != '' ? $usuario->getImagem() : 'usuario.png') ?>" alt="" width="50" class="rounded-circle">
+				</td>
+				<th><?= $usuario->getId() ?></th>
 				<td><?= $usuario->getNome() ?></td>
 				<td><?= $usuario->getEmail() ?></td>
 				<td>

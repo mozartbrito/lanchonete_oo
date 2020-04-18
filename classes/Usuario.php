@@ -5,6 +5,7 @@ class Usuario
 	private $nome;
 	private $senha;
 	private $email;
+    private $imagem;
 
     /**
      * @return mixed
@@ -82,6 +83,25 @@ class Usuario
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+    /**
+     * @return mixed
+     */
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
+
+    /**
+     * @param mixed $imagem
+     *
+     * @return self
+     */
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
 
         return $this;
     }
