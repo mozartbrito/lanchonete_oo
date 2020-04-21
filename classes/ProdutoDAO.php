@@ -18,7 +18,7 @@ class ProdutoDAO extends Model
     	return $this->inserir($values);
     }
 
-     public function alteraProduto(Produto $produto) {
+    public function alteraProduto(Produto $produto) {
     	$values = "nome = '{$produto->getNome()}',
     				preco = '{$produto->getPrecoBD()}',
     				categoria = '{$produto->getCategoria()->getId()}'";

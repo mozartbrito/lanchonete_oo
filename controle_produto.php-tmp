@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'classes/Produto.php';
 require 'classes/Categoria.php';
 require 'classes/Imagem.php';
@@ -6,23 +6,23 @@ require 'classes/ProdutoDAO.php';
 require 'classes/ImagemDAO.php';
 require 'classes/CategoriaDAO.php';
 
-$produto = new Produto();
-$produtoDAO = new ProdutoDAO();
+$produto      = new Produto();
+$produtoDAO   = new ProdutoDAO();
 $categoriaDAO = new CategoriaDAO();
 
 $acao = $_GET['acao'];
-$id = '';
-if(isset($_GET['id']) && $_GET['id'] != '') {
+$id   = '';
+if (isset($_GET['id']) && $_GET['id'] != '') {
 	$id = $_GET['id'];
 }
 
-if($acao == 'deletar') {
+if ($acao == 'deletar') {
 
 	$produtoDAO->deletar($id);
 	$msg = 'Produto excluído com sucesso';
 	header("Location: produtos.php?msg=$msg");
 
-} else if($acao == 'cadastrar') {
+} else if ($acao == 'cadastrar') {
 
 	$categoria = $categoriaDAO->get($_POST['categoria']);
 
@@ -34,8 +34,8 @@ if($acao == 'deletar') {
 	$msg = 'Produto cadastrado com sucesso';
 	header("Location: produtos.php?msg=$msg");
 
-} else if($acao == 'editar') {
-	
+} else if ($acao == 'editar') {
+
 	$categoria = $categoriaDAO->get($_POST['categoria']);
 
 	$produto->setId($_POST['id']);
@@ -47,18 +47,18 @@ if($acao == 'deletar') {
 	$msg = 'Produto alterado com sucesso';
 
 	header("Location: produtos.php?msg=$msg");
-	
-} else if($acao == 'cadastraImagens') {
+
+} else if ($acao == 'cadastraImagens') {
 
 	$produto_id = $_POST['produto_id'];
 	/**
 	Configurações de upload de imagens
-	*/
+	 */
 	$upload['pasta_imagens'] = 'assets/img/produtos/';
-	$pasta = $upload['pasta_imagens'] . $produto_id . '/';
+	$pasta                   = $upload['pasta_imagens'].$produto_id.'/';
 
-	if(!is_dir($pasta)) {
-		mkdir($upload['pasta_imagens'] . $produto_id . '/', 0775, true);
+	if (!is_dir($pasta)) {
+		mkdir($upload['pasta_imagens'].$produto_id.'/', 0775, true);
 	}
 
 	$upload['extensoes'] = ['jpg', 'png', 'gif'];
@@ -69,40 +69,38 @@ if($acao == 'deletar') {
 	$upload['erros'][3] = 'O upload do arquivo foi feito parcialmente';
 	$upload['erros'][4] = 'Não foi feito o upload do arquivo';
 
-
-	$imagem = new Imagem();
+	$imagem    = new Imagem();
 	$imagemDAO = new ImagemDAO();
 
 	$imagem->setProdutoId($produto_id);
 
 	$qtd_imagens = count($_FILES['imagens']['name']);
 
-	for($i = 0; $i < $qtd_imagens; $i++)
-	{
+	for ($i = 0; $i < $qtd_imagens; $i++) {
 
 		$descricao = explode('.', $_FILES['imagens']['name'][$i]);
 
 		$extensao = strtolower(end($descricao));
-		if(array_search($extensao, $upload['extensoes']) === false) {
-		  $msg = "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
-		  header("Location: form_produto.php?id=$produto_id&msg=$msg");
-		  exit;
+		if (array_search($extensao, $upload['extensoes']) === false) {
+			$msg = "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
+			header("Location: form_produto.php?id=$produto_id&msg=$msg");
+			exit;
 		}
-		$nome_final = $descricao[0] . '-' . date('YmdHmi') . '.' . $extensao;
+		$nome_final = $descricao[0].'-'.date('YmdHmi').'.'.$extensao;
 		$imagem->setDescricao($descricao[0]);
-		
+
 		// Depois verifica se é possível mover o arquivo para a pasta escolhida
-		if (move_uploaded_file($_FILES['imagens']['tmp_name'][$i], $pasta . $nome_final)) {
-			$caminho = $pasta . $nome_final;
+		if (move_uploaded_file($_FILES['imagens']['tmp_name'][$i], $pasta.$nome_final)) {
+			$caminho = $pasta.$nome_final;
 
 			$imagem->setCaminho($caminho);
 			$imagemDAO->insereImagem($imagem);
 
 		} else {
-		  // Não foi possível fazer o upload, provavelmente a pasta está incorreta
-		  $msg = "Não foi possível enviar o(s) arquivo, tente novamente";
-		  header("Location: form_produto.php?id=$produto_id&msg=$msg");
-		  exit;
+			// Não foi possível fazer o upload, provavelmente a pasta está incorreta
+			$msg = "Não foi possível enviar o(s) arquivo, tente novamente";
+			header("Location: form_produto.php?id=$produto_id&msg=$msg");
+			exit;
 		}
 
 	}
@@ -110,4 +108,3 @@ if($acao == 'deletar') {
 	header("Location: form_produto.php?id=$produto_id&msg=$msg");
 
 }
-

@@ -90,9 +90,21 @@ if ($acao == 'deletar') {
 			exit;
 		}
 		$nome_final = $imagem[0].'-'.date('YmdHmi').'.'.$extensao;
+
 		// Depois verifica se é possível mover o arquivo para a pasta escolhida
 		if (move_uploaded_file($_FILES['imagem']['tmp_name'], $upload['pasta_usuarios'].$nome_final)) {
+
+			//incluindo a imagem nova no registro do usuário
 			$usuario->setImagem($nome_final);
+
+			//alimentando um usuário temporário
+			$usuarioTemp = $usuarioDAO->get($id_usuario);
+			//montando link da imagem atual do usuario, representado pelo usuario temporario
+			$imagem_a_remover = $upload['pasta_usuarios'].$usuarioTemp->getImagem();
+			//removendo a imagem antiga
+			if (file_exists($imagem_a_remover)) {
+				unlink($imagem_a_remover);
+			}
 
 			if ($id_usuario == $_SESSION['id_usuario']) {
 				$_SESSION['imagem'] = $usuario->getImagem();
@@ -112,4 +124,20 @@ if ($acao == 'deletar') {
 	$msg = 'Usuário alterado com sucesso';
 
 	header("Location: form_usuario.php?id=$id_usuario&msg=$msg");
+
+} else if ($acao == 'removeImagem') {
+	$usuario = $usuarioDAO->get($id);
+
+	$imagem_a_remover = $upload['pasta_usuarios'].$usuario->getImagem();
+	//removendo a imagem antiga
+	if (file_exists($imagem_a_remover)) {
+		unlink($imagem_a_remover);
+	}
+	$usuario->setImagem('--');
+	$usuarioDAO->alteraUsuario($usuario);
+
+	$msg = 'Imagem removida com sucesso';
+
+	header("Location: usuarios.php?msg=$msg");
+
 }

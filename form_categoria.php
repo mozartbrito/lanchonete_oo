@@ -32,6 +32,7 @@
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Salvar</button>
+				<button type="reset" class="btn btn-warning">Resetar</button>
 			</div>
 		</form>
 	</div>
