@@ -90,6 +90,14 @@ class Cliente
     }
 
     /**
+     * @return mixed
+     */
+    public function getDtNascimentoBD()
+    {
+        return $this->dt_nascimento;
+    }
+
+    /**
      * @param mixed $dt_nascimento
      *
      * @return self

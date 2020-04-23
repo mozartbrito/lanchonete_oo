@@ -14,7 +14,7 @@ class ClienteDAO extends Model
     	$values = "null,
 				   '{$cliente->getNome()}',
 				   '{$cliente->getCpf()}',
-				   '{$cliente->getDtNascimento()}',
+				   '{$cliente->getDtNascimentoBD()}',
 				   '{$cliente->getSexo()}',
 				   '{$cliente->getEmail()}',
 				   '{$cliente->getCelular()}',
@@ -34,7 +34,7 @@ class ClienteDAO extends Model
     {
     	$values = "nome = '{$cliente->getNome()}',
 				   cpf = '{$cliente->getCpf()}',
-				   dt_nascimento = '{$cliente->getDtNascimento()}',
+				   dt_nascimento = '{$cliente->getDtNascimentoBD()}',
 				   sexo = '{$cliente->getSexo()}',
 				   email = '{$cliente->getEmail()}',
 				   celular = '{$cliente->getCelular()}',
@@ -48,5 +48,21 @@ class ClienteDAO extends Model
 				   imagem = '{$cliente->getImagem()}'
     				";
     	$this->alterar($cliente->getId(), $values);
+    }
+
+    public function listar($pesquisa = '')
+    {
+    	if($pesquisa != '') {
+    		$sql = "SELECT * FROM {$this->tabela}
+    				WHERE nome LIKE '%{$pesquisa}%'
+    					OR email LIKE '%{$pesquisa}%'
+    					OR cpf LIKE '%{$pesquisa}%'";
+    	} else {
+    		$sql = "SELECT * FROM {$this->tabela}";
+    	}
+    	$stmt = $this->db->prepare($sql);
+    	$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+    	$stmt->execute();
+    	return $stmt->fetchAll();
     }
 }
