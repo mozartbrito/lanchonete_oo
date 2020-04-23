@@ -28,25 +28,31 @@ if ($acao == 'deletar') {
 
 	$produto->setNome($_POST['nome']);
 	$produto->setPreco($_POST['preco']);
+	$produto->setQtd($_POST['qtd']);
+	$produto->setDescricao($_POST['descricao']);
 	$produto->setCategoria($categoria);
 
-	$produtoDAO->insereProduto($produto);
+	$id  = $produtoDAO->insereProduto($produto);
 	$msg = 'Produto cadastrado com sucesso';
-	header("Location: produtos.php?msg=$msg");
+	header("Location: form_produto.php?id=$id&msg=$msg");
 
 } else if ($acao == 'editar') {
-
+	$id        = $_POST['id'];
 	$categoria = $categoriaDAO->get($_POST['categoria']);
 
 	$produto->setId($_POST['id']);
 	$produto->setNome($_POST['nome']);
 	$produto->setPreco($_POST['preco']);
+	$produto->setQtd($_POST['qtd']);
+	$produto->setDescricao($_POST['descricao']);
 	$produto->setCategoria($categoria);
+	//print_r($produto);
+	exit;
 
 	$produtoDAO->alteraProduto($produto);
 	$msg = 'Produto alterado com sucesso';
 
-	header("Location: produtos.php?msg=$msg");
+	header("Location: form_produto.php?id=$id&msg=$msg");
 
 } else if ($acao == 'cadastraImagens') {
 
