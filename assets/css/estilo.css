@@ -3,7 +3,9 @@
 	margin-right: 10px;
 	margin-left: 10px;
 }
-.btn-show-pass {
-	/* position: relative;
-	    top: -38px; */
+.msg-error-form {
+	color: #ff2222;
+    font-weight: bold;
+    font-size: 12px;
+    display: none;
 }

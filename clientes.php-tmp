@@ -41,6 +41,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 	<table class="table table-hover table-bordered table-striped">
 		<thead>
 			<tr>
+				<th></th>
 				<th>#ID</th>
 				<th>Nome</th>
 				<th>CPF</th>
@@ -54,6 +55,9 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 <?php foreach ($clientes as $cliente) {
 	?>
 				<tr>
+					<td>
+						<img src="/assets/img/clientes/<?=($cliente->getImagem() != '' && file_exists('assets/img/clientes/'.$cliente->getImagem())?$cliente->getImagem():'usuario.png')?>" alt="" class="rounded-circle" width="50">
+					</td>
 					<td><?=$cliente->getId()?></td>
 					<td><?=$cliente->getNome()?></td>
 					<td><?=$cliente->getCpf()?></td>

@@ -14,6 +14,7 @@ class ClienteDAO extends Model {
 				   '{$cliente->getDtNascimentoBD()}',
 				   '{$cliente->getSexo()}',
 				   '{$cliente->getEmail()}',
+				   '{$cliente->getSenha()}',
 				   '{$cliente->getCelular()}',
 				   '{$cliente->getCep()}',
 				   '{$cliente->getLogradouro()}',
@@ -24,10 +25,12 @@ class ClienteDAO extends Model {
 				   '{$cliente->getEstado()}',
 				   '{$cliente->getImagem()}'
 ";
-
-		return $this->insert($values);
+		return $this->inserir($values);
 	}
 	public function alteraCliente(Cliente $cliente) {
+		$altera_senha  = ($cliente->getSenha() != ''?", senha = '{$cliente->getSenha()}'":'');
+		$altera_imagem = ($cliente->getImagem() != ''?", imagem = '{$cliente->getImagem()}'":'');
+
 		$values = "nome = '{$cliente->getNome()}',
 				   cpf = '{$cliente->getCpf()}',
 				   dt_nascimento = '{$cliente->getDtNascimentoBD()}',
@@ -40,8 +43,9 @@ class ClienteDAO extends Model {
 				   numero = '{$cliente->getNumero()}',
 				   bairro = '{$cliente->getBairro()}',
 				   cidade = '{$cliente->getCidade()}',
-				   estado = '{$cliente->getEstado()}',
-				   imagem = '{$cliente->getImagem()}'
+				   estado = '{$cliente->getEstado()}'
+{$altera_imagem}
+{$altera_senha}
 ";
 		$this->alterar($cliente->getId(), $values);
 	}

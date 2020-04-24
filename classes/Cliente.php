@@ -84,9 +84,12 @@ class Cliente
      */
     public function getDtNascimento()
     {
-        $data = explode('-', $this->dt_nascimento);
-        $nova_data = $data[2] .'/'.$data[1] . '/' . $data[0];
-        return $nova_data;
+        if($this->dt_nascimento != '') {
+            $data = explode('-', $this->dt_nascimento);
+            $nova_data = $data[2] .'/'.$data[1] . '/' . $data[0];
+            return $nova_data;
+        }
+        return '';
     }
 
     /**

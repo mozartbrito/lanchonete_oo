@@ -51,7 +51,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 			<div class="row">
 				<div class="form-group col-4">
 					<label for="cpf">CPF:</label>
-					<input type="text" name="cpf" id="cpf" value="<?=($cliente->getCpf() != ''?$cliente->getCpf():'')?>" class="form-control">
+					<input type="text" name="cpf" id="cpf" value="<?=($cliente->getCpf() != ''?$cliente->getCpf():'')?>" class="form-control cpf">
 				</div>
 				<div class="form-group col-4">
 					<label for="dt_nascimento">Data de nascimento:</label>
@@ -70,7 +70,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 			<div class="row">
 				<div class="form-group col-3">
 					<label for="celular">Celular:</label>
-					<input type="text" name="celular" id="celular" value="<?=($cliente->getCelular() != ''?$cliente->getCelular():'')?>" class="form-control">
+					<input type="text" name="celular" id="celular" value="<?=($cliente->getCelular() != ''?$cliente->getCelular():'')?>" class="form-control telefone">
 				</div>
 				<div class="form-group col-3">
 					<label for="senha">Senha:</label>
@@ -83,8 +83,8 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 			</div>
 			<div class="row">
 				<div class="form-group col-4">
-					<label for="cep">CEP:</label>
-					<input type="text" name="cep" id="cep" value="<?=($cliente->getCep() != ''?$cliente->getCep():'');?>" class="form-control">
+					<label for="cep">CEP: <span class="msg-error-form" id="msg-cep">(CEP não encontrado)</span></label>
+					<input type="text" name="cep" id="cep" value="<?=($cliente->getCep() != ''?$cliente->getCep():'');?>" class="form-control cep">
 				</div>
 				<div class="form-group col-8">
 					<label for="logradouro">Logradouro:</label>
@@ -143,4 +143,40 @@ function showThumbnail(files) {
         reader.readAsDataURL(files[0]);
     }
 }
+
+$('.cep').on('change', function() {
+	var cep = $(this).val().replace('-', '');
+
+	$.ajax({
+		url: 'https://viacep.com.br/ws/' + cep + '/json/',
+		type: 'GET',
+		dataType: 'json',
+		beforeSend:function() {
+			$('#logradouro').val('...');
+			$('#bairro').val('...');
+			$('#cidade').val('...');
+			$('#estado').val('...');
+		},
+		success: function(resultado) {
+			if(typeof resultado.logradouro === "undefined") {
+				$('#msg-cep').show();
+				$('#cep').val('');
+				$('#logradouro').val('');
+				$('#bairro').val('');
+				$('#cidade').val('');
+				$('#estado').val('');
+				$('#cep').focus();
+			} else {
+				$('#msg-cep').hide();
+				$('#logradouro').val(resultado.logradouro);
+				$('#bairro').val(resultado.bairro);
+				$('#cidade').val(resultado.localidade);
+				$('#estado').val(resultado.uf);
+				$('#numero').focus();
+
+			}
+	    },
+	})
+
+})
 </script>
