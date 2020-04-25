@@ -4,20 +4,23 @@
 	margin-left: 10px;
 }
 .msg-error-form {
-	color: #ff2222;
+	color: #c0392b;
     font-weight: bold;
     font-size: 12px;
     display: none;
 }
 .total {
 	text-align: center;
-	font-size: 35px;
+	font-size: 50px;
 	font-weight: bold;
-	color:  green;
+	color:  #27ae60;
 }
 .total.finalizadas {
-	color:  blue;
+	color:  #3498db;
 }
-.total.pendentes {
-	color:  red;
+.total.pendente {
+	color:  #e74c3c;
+}
+.card-dashboard {
+	padding: 0;
 }

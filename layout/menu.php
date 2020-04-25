@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <div class="container">
+    
+  
   <a class="navbar-brand" href="administrativa.php">Lanchonete</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
@@ -61,4 +64,6 @@
       <small>  <a class="btn btn-outline-secondary btn-sm" href="logout.php" onclick="return confirm('Deseja realmente sair?')">Sair</a></small>
     </span>
   </div>
+  </div>
 </nav>
+<div class="container">
