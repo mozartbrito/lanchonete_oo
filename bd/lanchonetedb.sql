@@ -64,7 +64,7 @@ CREATE TABLE `clientes` (
   `estado` char(2) DEFAULT NULL,
   `imagem` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Daniel Lagos','833.333.890-96','1996-10-02','Masculino','danielcliente@email.com',NULL,'(61) 99999-9999',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `clientes` VALUES (1,'Daniel Lagos Souza','833.333.890-96','1996-10-02','Masculino','danielcliente@email.com',NULL,'(61) 99999-9999','71750-000','Núcleo Rural Vargem Bonita','4','Setor de chacaras','Núcleo Rural Vargem Bonita (Park Way)','Brasília','DF','noite-20200424230417.jpg'),(2,'Maria Madalena','006.437.970-17','1988-05-28','Feminino','mariamadalena@email.com',NULL,'(61) 98686-7878',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'Mozart Teixeira de Brito','949.494.646-45','2010-10-10','Masculino','mozart.contato@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','(64) 65465-4646','72583-300','Rua 500 Lote 502','','5454','Setor Meireles (Santa Maria)','Brasília','DF','mozart-brito-20200424010419.jpg');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `imagens` (
   PRIMARY KEY (`id`),
   KEY `fk_produto_imagem_idx` (`produto_id`),
   CONSTRAINT `fk_produto_imagem` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,6 +163,70 @@ INSERT INTO `usuarios` VALUES (3,'Juan Pablo','juan@email.com','81dc9bdb52d04dc2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `vendas`
+--
+
+DROP TABLE IF EXISTS `vendas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vendas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(45) NOT NULL,
+  `cliente_id` int NOT NULL,
+  `data_venda` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('Iniciada','Pendente','Finalizada','Cancelada') NOT NULL DEFAULT 'Iniciada',
+  `data_finalizacao` datetime DEFAULT NULL,
+  `forma_pagamento` varchar(45) DEFAULT NULL,
+  `data_pagamento` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_cliente_idx` (`cliente_id`),
+  CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendas`
+--
+
+LOCK TABLES `vendas` WRITE;
+/*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
+INSERT INTO `vendas` VALUES (1,'2020265644',2,'2020-04-23 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(2,'2020265648',2,'2020-04-23 20:30:00','Iniciada',NULL,'',NULL),(3,'2020265647',3,'2020-04-23 17:20:00','Pendente',NULL,'',NULL);
+/*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vendas_produtos`
+--
+
+DROP TABLE IF EXISTS `vendas_produtos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vendas_produtos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `venda_id` int NOT NULL,
+  `produto_id` int NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `qtd` int NOT NULL DEFAULT '1',
+  `desconto` decimal(10,2) DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  KEY `fk_produto_idx` (`produto_id`),
+  KEY `fk_venda_idx` (`venda_id`),
+  CONSTRAINT `fk_produto` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`),
+  CONSTRAINT `fk_venda` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendas_produtos`
+--
+
+LOCK TABLES `vendas_produtos` WRITE;
+/*!40000 ALTER TABLE `vendas_produtos` DISABLE KEYS */;
+INSERT INTO `vendas_produtos` VALUES (1,1,3,5.00,2,0.00),(2,1,5,19.90,3,0.00),(3,2,4,4.50,1,0.00),(4,3,3,5.00,1,0.00),(5,3,5,19.90,2,0.00);
+/*!40000 ALTER TABLE `vendas_produtos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping routines for database 'lanchonete_api'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-22 22:17:17
+-- Dump completed on 2020-04-24 21:41:15
