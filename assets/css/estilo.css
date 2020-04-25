@@ -9,3 +9,15 @@
     font-size: 12px;
     display: none;
 }
+.total {
+	text-align: center;
+	font-size: 35px;
+	font-weight: bold;
+	color:  green;
+}
+.total.finalizadas {
+	color:  blue;
+}
+.total.pendentes {
+	color:  red;
+}
