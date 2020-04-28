@@ -122,7 +122,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id`),
   KEY `fk_categoria_idx` (`categoria`),
   CONSTRAINT `fk_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (3,'Refrigerante',5.00,2,15,'sadfasdf'),(4,'Coca Lata',4.50,2,4,'Cola lata de 350ml'),(5,'Burguer Duplo',19.90,1,0,'2 hamburgueres de carne com 180g cada uma;\r\nAlface;\r\nTomate;\r\nMussarela;\r\nCebola;');
+INSERT INTO `produtos` VALUES (3,'Refrigerante',5.00,2,15,'sadfasdf'),(4,'Coca Lata',4.50,2,4,'Cola lata de 350ml'),(5,'Burguer Duplo',19.90,1,0,'2 hamburgueres de carne com 180g cada uma;\r\nAlface;\r\nTomate;\r\nMussarela;\r\nCebola;'),(6,'Contra filé',25.90,13,20,'Contra filé com arroz branco, feijão tropeiro e vinagrete');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `vendas` (
   PRIMARY KEY (`id`),
   KEY `fk_cliente_idx` (`cliente_id`),
   CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `vendas` (
 
 LOCK TABLES `vendas` WRITE;
 /*!40000 ALTER TABLE `vendas` DISABLE KEYS */;
-INSERT INTO `vendas` VALUES (1,'2020265644',2,'2020-04-23 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(2,'2020265648',2,'2020-04-23 20:30:00','Iniciada',NULL,'',NULL),(3,'2020265647',3,'2020-04-23 17:20:00','Pendente',NULL,'',NULL);
+INSERT INTO `vendas` VALUES (1,'2020265644',2,'2020-04-21 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(2,'2020265648',2,'2020-04-22 20:30:00','Pendente',NULL,'',NULL),(3,'2020265647',3,'2020-04-23 17:20:00','Pendente',NULL,'',NULL),(4,'2020265644',2,'2020-04-21 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(5,'2020265644',2,'2020-04-24 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(6,'2020265644',2,'2020-04-10 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(7,'2020265644',2,'2020-04-02 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(8,'2020265644',2,'2020-04-29 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(9,'2020265644',2,'2020-04-30 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(10,'2020265644',2,'2020-04-30 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(11,'2020265644',2,'2020-04-18 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(12,'2020265644',2,'2020-04-18 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(13,'2020265644',2,'2020-04-01 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(14,'2020265644',2,'2020-04-01 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(15,'2020265644',2,'2020-04-30 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(16,'2020265644',2,'2020-04-17 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00'),(17,'2020265644',2,'2020-04-12 15:30:00','Finalizada','2020-04-23 12:38:00','Cartão','2020-04-23 12:38:00');
 /*!40000 ALTER TABLE `vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `vendas_produtos` (
   KEY `fk_venda_idx` (`venda_id`),
   CONSTRAINT `fk_produto` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`),
   CONSTRAINT `fk_venda` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `vendas_produtos` (
 
 LOCK TABLES `vendas_produtos` WRITE;
 /*!40000 ALTER TABLE `vendas_produtos` DISABLE KEYS */;
-INSERT INTO `vendas_produtos` VALUES (1,1,3,5.00,2,0.00),(2,1,5,19.90,3,0.00),(3,2,4,4.50,1,0.00),(4,3,3,5.00,1,0.00),(5,3,5,19.90,2,0.00);
+INSERT INTO `vendas_produtos` VALUES (1,1,3,5.00,2,0.00),(2,1,5,19.90,3,0.00),(3,2,4,4.50,1,0.00),(4,3,3,5.00,1,0.00),(5,3,5,19.90,2,0.00),(6,2,6,7.90,2,0.00),(7,3,6,7.90,5,0.00),(8,2,6,7.90,2,0.00),(9,3,6,7.90,5,0.00),(10,2,6,7.90,2,0.00),(11,3,6,5.00,2,0.00),(12,5,6,5.00,2,0.00),(13,2,6,5.00,2,0.00),(14,2,6,5.00,2,0.00),(15,2,6,5.00,2,0.00),(16,5,6,5.00,2,0.00),(17,2,6,5.00,2,0.00),(18,6,6,5.00,2,0.00),(19,7,6,5.00,2,0.00),(20,8,6,5.00,2,0.00),(21,9,6,5.00,2,0.00),(22,9,6,12.00,2,0.00),(23,13,6,5.00,2,0.00),(24,12,6,19.90,3,0.00),(25,11,6,19.90,3,0.00),(26,10,6,19.90,2,0.00),(27,14,6,5.00,2,0.00),(28,14,6,5.00,2,0.00),(29,15,6,7.00,1,0.00),(30,16,6,7.00,2,0.00),(31,2,6,5.00,1,0.00),(32,17,6,5.00,2,0.00),(33,17,6,5.00,2,0.00);
 /*!40000 ALTER TABLE `vendas_produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-24 21:41:15
+-- Dump completed on 2020-04-27 22:28:47
