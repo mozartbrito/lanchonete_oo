@@ -1,3 +1,6 @@
+body {
+	background: #f1f1f1;
+}
 .row {
 	margin-bottom: 15px;
 }
@@ -27,6 +30,6 @@
 .card-dashboard {
 	padding: 0;
 }
-#produtos_categoria {
+#produtos_categoria, #vendas_status {
 	height: 250px;
 }

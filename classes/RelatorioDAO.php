@@ -26,8 +26,39 @@ class RelatorioDAO extends Model
         $sql = "SELECT c.nome as categoria, count(*) as total 
                 FROM {$table} p
                 LEFT JOIN categorias c ON c.id = p.categoria
-                GROUP BY p.categoria
-                {$where};";
+                {$where}
+                GROUP BY p.categoria;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    public function contarVendasStatus($table = 'vendas', $condicao = '')
+    {
+        $where = '';
+        if($condicao != '') {
+            $where = "WHERE {$condicao}";
+        }
+        $sql = "SELECT status, count(*) as total 
+                FROM {$table} v
+                {$where}
+                GROUP BY status;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    public function evolucaoVendas($table = 'vendas', $condicao = '')
+    {
+        $where = '';
+        if($condicao != '') {
+            $where = " WHERE {$condicao}";
+        }
+        $sql = "SELECT 
+                    DATE_FORMAT(v.data_venda, '%d/%m/%Y') as data, count(*) qtd, sum(vp.valor * vp.qtd) as total
+                FROM vendas v
+                LEFT JOIN vendas_produtos vp ON vp.venda_id = v.id
+                {$where}
+                GROUP BY DATE_FORMAT(v.data_venda, '%d/%m/%Y')
+                ORDER BY data_venda ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  
