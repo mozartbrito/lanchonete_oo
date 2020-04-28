@@ -1,3 +1,6 @@
+.row {
+	margin-bottom: 15px;
+}
 .user-img-menu {
 	width: 30px; 
 	margin-right: 10px;
@@ -23,4 +26,7 @@
 }
 .card-dashboard {
 	padding: 0;
+}
+#produtos_categoria {
+	height: 250px;
 }

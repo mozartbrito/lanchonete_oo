@@ -4,6 +4,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
 <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js" ></script>
 <script src="/assets/js/jquery.maskedinput.min.js" ></script>
+
+<script src="/assets/js/highchart/highcharts.js"></script>
+<script src="/assets/js/highchart/exporting.js"></script>
+<script src="/assets/js/highchart/export-data.js"></script>
+<script src="/assets/js/highchart/accessibility.js"></script>
+
+
 <script>
   $(function() {
     $('.moeda').maskMoney({
