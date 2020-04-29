@@ -17,8 +17,12 @@ class Model {
 		return $this->db->lastInsertId();
 	}
 
-	public function listar() {
-		$sql  = "SELECT * FROM {$this->tabela}";
+	public function listar($condicao = '') {
+		$where = '';
+		if ($condicao != '') {
+			$where = " WHERE {$condicao}";
+		}
+		$sql  = "SELECT * FROM {$this->tabela} {$where}";
 		$stmt = $this->db->prepare($sql);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
 		$stmt->execute();

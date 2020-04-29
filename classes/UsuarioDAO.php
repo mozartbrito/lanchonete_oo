@@ -14,7 +14,7 @@ class UsuarioDAO extends Model
 
     public function insereUsuario(Usuario $usuario)
     {
-    	$values = "null, '{$usuario->getNome()}','{$usuario->getEmail()}', '{$usuario->getSenha()}', '{$usuario->getImagem()}'";
+    	$values = "null, '{$usuario->getNome()}','{$usuario->getEmail()}', '{$usuario->getSenha()}', '{$usuario->getImagem()}', '{$usuario->getPerfilId()}'";
     	return $this->inserir($values);
     }
     public function alteraUsuario(Usuario $usuario)
@@ -25,6 +25,7 @@ class UsuarioDAO extends Model
     	$values = "
 			nome = '{$usuario->getNome()}'
 			, email = '{$usuario->getEmail()}'
+            , perfil_id = '{$usuario->getPerfilId()}'
             {$altera_imagem}
 			{$altera_senha}
     	";

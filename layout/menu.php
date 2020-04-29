@@ -44,8 +44,9 @@
           Usuários
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="usuarios.php">Listar</a>
-          <a class="dropdown-item" href="form_usuario.php">Cadastrar</a>
+          <a class="dropdown-item" href="usuarios.php">Listar Usuários</a>
+          <a class="dropdown-item" href="perfis.php">Listar Perfis</a>
+          <a class="dropdown-item" href="controles.php">Listar Controles</a>
         </div>
       </li>
       <li class="nav-item align-self-end" >

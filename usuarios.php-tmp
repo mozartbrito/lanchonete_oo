@@ -21,11 +21,11 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 		<h2>Gerenciar usuarios</h2>
 	</div>
 	<div class="col-2">
-		<a href="form_usuario.php" class="btn btn-success">Nova</a>
+		<a href="form_usuario.php" class="btn btn-success">Novo usuário</a>
 	</div>
 </div>
 <div class="row">
-	<table class="table table-hover table-bordered table-striped">
+	<table class="table table-hover table-bordered table-striped table-responsive-lg">
 		<thead>
 			<tr>
 				<th></th>
@@ -45,7 +45,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 					<td><?=$usuario->getNome()?></td>
 					<td><?=$usuario->getEmail()?></td>
 					<td>
-						<a href="form_usuario.php?id=<?=$usuario->getId()?>">Editar</a> |
+						<a href="form_usuario.php?id=<?=$usuario->getId()?>"  class="btn btn-warning"><i class="fas fa-edit"></i></a>
 						<a href="controle_usuario.php?acao=deletar&id=<?=$usuario->getId()?>" onclick="return confirm('Deseja realmente excluir?')">Excluir</a> |
 						<a href="controle_usuario.php?acao=removeImagem&id=<?=$usuario->getId()?>" onclick="return confirm('Deseja realmente remover a imagem?')">Remover imagem</a>
 					</td>
