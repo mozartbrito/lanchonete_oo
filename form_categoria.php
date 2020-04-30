@@ -1,6 +1,10 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
-<?php 
+<?php
+$permissoes = retornaControle('categoria');
+if(empty($permissoes)) {
+	header("Location: administrativa.php?msg=Sem permissão de acesso");
+}
 	require 'classes/Categoria.php'; 
 	require 'classes/CategoriaDAO.php';
 	$categoria = new Categoria();
@@ -28,12 +32,20 @@
 			</div>
 			<div class="form-group">
 				<label for="nome">Nome</label>
-				<input type="text" class="form-control" name="nome" id="nome" required value="<?= ($categoria->getNome() != '' ? $categoria->getNome() : '') ?>">
+				<input type="text" class="form-control" name="nome" id="nome" required value="<?= ($categoria->getNome() != '' ? $categoria->getNome() : '') ?>" >
 			</div>
+			<?php if($permissoes['insert'] && $categoria->getId() == ''): ?>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Salvar</button>
 				<button type="reset" class="btn btn-warning">Resetar</button>
 			</div>
+			<?php endif; ?>
+			<?php if($permissoes['update'] && $categoria->getId() != ''): ?>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Salvar</button>
+				<button type="reset" class="btn btn-warning">Resetar</button>
+			</div>
+			<?php endif; ?>
 		</form>
 	</div>
 </div>

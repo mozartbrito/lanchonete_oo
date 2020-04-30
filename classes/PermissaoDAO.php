@@ -29,10 +29,20 @@ class PermissaoDAO extends Model
         }
         $sql = "SELECT p.*, c.nome as controle FROM {$this->tabela} p
                 LEFT JOIN controles c ON c.id = p.controle_id
-                 {$where}";
+                 {$where}
+                 ORDER BY controle";
         $stmt = $this->db->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+    public function verificaControlePerfil($id_controle, $id_perfil)
+    {
+        $sql = "SELECT * FROM {$this->tabela}
+                WHERE controle_id = {$id_controle} AND perfil_id = {$id_perfil}";
+        $stmt = $this->db->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

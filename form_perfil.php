@@ -37,7 +37,7 @@
 				<label for="status">Status</label>
 				<select name="status" class="form-control">
 					<option value="1" <?= ($perfil->getStatus() == 1 ? 'selected' : '') ?>>Ativo</option>
-					<option value="0" <?= ($perfil->getStatus() == 1 ? 'selected' : '') ?>>Inativo</option>
+					<option value="0" <?= ($perfil->getStatus() == 0 ? 'selected' : '') ?>>Inativo</option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -77,24 +77,24 @@
 				</div>
 
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox1" value="1" name="select">
-				  <label class="form-check-label" for="inlineCheckbox1">select</label>
+				  <input class="form-check-input" checked type="checkbox" id="select" value="1" name="select">
+				  <label class="form-check-label" for="select">select</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="1" name="insert">
-				  <label class="form-check-label" for="inlineCheckbox2">insert</label>
+				  <input class="form-check-input" checked type="checkbox" id="insert" value="1" name="insert">
+				  <label class="form-check-label" for="insert">insert</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="1" name="update">
-				  <label class="form-check-label" for="inlineCheckbox2">update</label>
+				  <input class="form-check-input" checked type="checkbox" id="update" value="1" name="update">
+				  <label class="form-check-label" for="update">update</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="1" name="delete">
-				  <label class="form-check-label" for="inlineCheckbox2">delete</label>
+				  <input class="form-check-input" checked type="checkbox" id="delete" value="1" name="delete">
+				  <label class="form-check-label" for="delete">delete</label>
 				</div>
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="1" name="show">
-				  <label class="form-check-label" for="inlineCheckbox2">show</label>
+				  <input class="form-check-input" checked type="checkbox" id="show" value="1" name="show">
+				  <label class="form-check-label" for="show">show</label>
 				</div>
 				<button type="submit" class="btn btn-primary w-100">Adicionar permissão</button>
 				</form>
@@ -114,16 +114,30 @@
 						</tr>
 						<?php foreach($permissoes as $permissao): ?>
 						<tr>
-							<td><?= $permissao->controle; ?></td>
+							<td class="text-right">
+								<strong><?= $permissao->controle; ?></strong>
+							</td>
 							<td>
-								<?= ($permissao->getSelect() == 1 ? '->select' : ''); ?>
-								<?= ($permissao->getInsert() == 1 ? '->insert': '') ?>
-								<?= ($permissao->getDelete() == 1 ? '->delete': '') ?> 
-								<?= ($permissao->getUpdate() == 1 ? '->update': '') ?>
-								<?= ($permissao->getShow() == 1 ? '->show': ''
+								<?= ($permissao->getSelect() == 1 ? 
+								'<span class="badge badge-primary">select</span>' 
+								: ''); ?>
+								<?= ($permissao->getInsert() == 1 ? 
+								'<span class="badge badge-success">insert</span>'
+								: '') ?>
+								<?= ($permissao->getDelete() == 1 ? 
+								'<span class="badge badge-danger">delete</span>'
+								: '') ?> 
+								<?= ($permissao->getUpdate() == 1 ? 
+								'<span class="badge badge-warning">update</span>'
+								: '') ?>
+								<?= ($permissao->getShow() == 1 ? 
+									'<span class="badge badge-info">show</span>'
+									: ''
 ) ?>					</td>
 							<td>
-								<i class="fas fa-trash"></i>
+								<a href="controle_perfil.php?acao=deletaPermissao&id_permissao=<?= $permissao->getId(); ?>&id_perfil=<?= $perfil->getId(); ?>" class="btn btn-outline-danger" onclick="return confirm('Deseja realmente excluir?')">
+									<i class="fas fa-trash"></i>
+								</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>

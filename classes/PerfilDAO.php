@@ -16,7 +16,7 @@ class PerfilDAO extends Model
     }
 
     public function alteraPerfil(Perfil $perfil) {
-    	$values = "nome = '{$perfil->getNome()}', status = '{$perfil->getStatus()}'";
+    	$values = "nome = '{$perfil->getDescricao()}', status = '{$perfil->getStatus()}'";
     	$this->alterar($perfil->getId(), $values);
     }
 }

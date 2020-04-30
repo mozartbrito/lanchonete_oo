@@ -8,14 +8,10 @@ $path = $_SERVER['DOCUMENT_ROOT'];
 require 'classes/Usuario.php';
 require 'classes/UsuarioDAO.php';
 $usuarioDAO = new UsuarioDAO();
-$usuarios = $usuarioDAO->listar();
+$usuarios = $usuarioDAO->listarUsuarios();
 
 ?>
-<?php 
-	if(isset($_GET['msg']) && $_GET['msg'] != '') {
-	 echo '<div class="alert alert-info">'.$_GET['msg'].'</div>';
-	}
-?>
+
 <div class="row" style="margin-top:40px">
 	<div class="col-10">
 		<h2>Gerenciar usuarios</h2>
@@ -32,6 +28,7 @@ $usuarios = $usuarioDAO->listar();
 				<th>#ID</th>
 				<th>Nome</th>
 				<th>E-mail</th>
+				<th>Perfil</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
@@ -44,10 +41,15 @@ $usuarios = $usuarioDAO->listar();
 				<th><?= $usuario->getId() ?></th>
 				<td><?= $usuario->getNome() ?></td>
 				<td><?= $usuario->getEmail() ?></td>
+				<td><?= $usuario->perfil ?></td>
 				<td>
-					<a href="form_usuario.php?id=<?= $usuario->getId() ?>"  class="btn btn-warning"><i class="fas fa-edit"></i></a>
-					<a href="controle_usuario.php?acao=deletar&id=<?= $usuario->getId() ?>" onclick="return confirm('Deseja realmente excluir?')">Excluir</a> | 
-					<a href="controle_usuario.php?acao=removeImagem&id=<?= $usuario->getId() ?>" onclick="return confirm('Deseja realmente remover a imagem?')">Remover imagem</a>
+					<a href="form_usuario.php?id=<?= $usuario->getId() ?>"  class="btn btn-warning"  data-toggle="tooltip" title="Editar usuário"><i class="fas fa-edit"></i></a>
+					<a href="controle_usuario.php?acao=deletar&id=<?= $usuario->getId() ?>" onclick="return confirm('Deseja realmente excluir?')" class="btn btn-danger" data-toggle="tooltip" title="Remover usuário">
+						<i class="fas fa-trash-alt"></i>
+					</a>
+					<a href="controle_usuario.php?acao=removeImagem&id=<?= $usuario->getId() ?>" onclick="return confirm('Deseja realmente remover a imagem?')" class="btn btn-danger" data-toggle="tooltip" title="Remover imagem">
+						<i class="fas fa-folder-minus"></i>
+					</a>
 				</td>
 			</tr>
 			<?php } ?>
