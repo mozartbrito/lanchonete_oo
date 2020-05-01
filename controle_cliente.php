@@ -1,7 +1,15 @@
 <?php 
-session_start();
+require_once './includes/validacao.php';
+require_once './includes/funcoes.php';
 require 'classes/Cliente.php';
 require 'classes/ClienteDAO.php';
+
+$permissoes = retornaControle('cliente');
+$permissoesImagem = retornaControle('removeImagemCliente');
+
+if(empty($permissoes)) {
+	header("Location: adminstrativa.php?msg=Acesso negado.");
+}
 
 $cliente = new Cliente();
 $clienteDAO = new ClienteDAO();
@@ -26,13 +34,13 @@ $upload['erros'][4] = 'Não foi feito o upload do arquivo';
 
 
 
-if($acao == 'deletar') {
+if($acao == 'deletar' && $permissoes['delete']) {
 
 	$clienteDAO->deletar($id);
 	$msg = 'Cliente excluído com sucesso';
 
 	header("Location: clientes.php?msg=$msg");
-} else if($acao == 'cadastrar') {
+} else if($acao == 'cadastrar' && $permissoes['insert']) {
 
 	if($_FILES['imagem']['name'] != '') {
 
@@ -80,7 +88,7 @@ if($acao == 'deletar') {
 
 	header("Location: form_cliente.php?id=$id_cliente&msg=$msg");
 
-} else if($acao == 'editar') {
+} else if($acao == 'editar' && $permissoes['update']) {
 
 	if($_POST['senha'] != ''){
 		$cliente->setSenha($_POST['senha']);
@@ -149,7 +157,7 @@ if($acao == 'deletar') {
 	
 	header("Location: form_cliente.php?id=$id_cliente&msg=$msg");
 
-} else if($acao == 'removeImagem') {
+} else if($acao == 'removeImagem' && !empty($permissoesImagem)) {
 	$cliente = $clienteDAO->get($id);
 
 	$imagem_a_remover = $upload['pasta_clientes'] . $cliente->getImagem();
@@ -162,6 +170,10 @@ if($acao == 'deletar') {
 
 	$msg = 'Imagem removida com sucesso';
 	
+	header("Location: clientes.php?msg=$msg");
+
+} else {
+	$msg = "Não possui permissão.";
 	header("Location: clientes.php?msg=$msg");
 
 }

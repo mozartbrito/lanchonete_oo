@@ -8,11 +8,6 @@ $perfiDAO = new PerfilDAO();
 $perfis = $perfiDAO->listar();
 
 ?>
-<?php 
-	if(isset($_GET['msg']) && $_GET['msg'] != '') {
-	 echo '<div class="alert alert-info">'.$_GET['msg'].'</div>';
-	}
-?>
 <div class="row" style="margin-top:40px">
 	<div class="col-10">
 		<h2>Gerenciar perfis</h2>

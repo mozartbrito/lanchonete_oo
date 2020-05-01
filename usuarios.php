@@ -1,6 +1,13 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
-<?php 
+<?php
+$permissoes = retornaControle('usuario');
+$permissoesImagem = retornaControle('removeImagemUsuario');
+if(empty($permissoes)) {
+	header("Localtion: administrativa.php?msg=Acesso negado.");
+}
+
+
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));
 $path = $_SERVER['DOCUMENT_ROOT'];

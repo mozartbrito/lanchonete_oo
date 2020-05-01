@@ -1,6 +1,10 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
-<?php 
+<?php
+	$permissoes = retornaControle('produto');
+	if(empty($permissoes)) {
+		header("Location: adminstrativa.php?msg=Acesso negado.");
+	}
 	require 'classes/Categoria.php';
 	require 'classes/CategoriaDAO.php';
 	require 'classes/Imagem.php';
@@ -82,9 +86,11 @@
 					</div>
 				</div>
 			</div>
+			<?php if(($permissoes['insert'] && $produto->getId() == '') || ($permissoes['update'] && $produto->getId() != '')): ?>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
+				<button type="submit" class="btn btn-primary w-100">Salvar</button>
 			</div>
+			<?php endif; ?>
 		</form>
 	</div>
 
@@ -92,6 +98,12 @@
 		<div class="col-6">
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
+		<?php 
+			$permissoesImagens = retornaControle('imagensProduto');
+
+			if(!empty($permissoesImagens)): 
+		?>
+			
 			<div class="card">
 				<div class="card-header">
 					Imagens
@@ -105,10 +117,11 @@
 						</div>
 						<br>
 						<br>
-						<button type="submit" class="btn btn-primary w-100">Cadastrar imagens</button>
+						<button type="submit" class="btn btn-info w-100">Cadastrar imagens</button>
 					</form>
 				</div>
 			</div>
+			<?php endif; ?>
 			<div class="card">
 				<div class="card-header">
 					Imagens cadastradas

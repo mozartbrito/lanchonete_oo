@@ -1,6 +1,8 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
 <?php 
+
+	$permissoes = retornaControle('cliente');
 	require 'classes/Cliente.php'; 
 	require 'classes/ClienteDAO.php';
 	$cliente = new Cliente();
@@ -115,9 +117,11 @@
 					<input type="text" name="estado" id="estado" value="<?= ($cliente->getEstado() != '' ? $cliente->getEstado() : ''); ?>" class="form-control">
 				</div>
 			</div>
+			<?php if(($permissoes['update'] && $cliente->getId() != '') || ($permissoes['insert'] && $cliente->getId() == '')): ?>
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Salvar</button>
+					<button type="submit" class="btn btn-primary w-100">Salvar</button>
 				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </form>
