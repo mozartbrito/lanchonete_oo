@@ -1,6 +1,11 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
 <?php 
+	$permissoes = retornaControle('perfil');
+	
+	if(empty($permissoes)) {
+		header("Location: adminstrativa.php?msg=Acesso negado.");
+	}
 	require 'classes/Perfil.php'; 
 	require 'classes/PerfilDAO.php';
 	$perfil = new Perfil();
@@ -16,9 +21,11 @@
 	<div class="offset-3">
 		<h2>Cadastrar perfil</h2>
 	</div>
+	<?php if($permissoes['insert']): ?>
 	<div class="col-2">
 		<a href="form_perfil.php" class="btn btn-success">Novo perfil</a>
 	</div>
+	<?php endif; ?>
 </div>
 
 <div class="row">
@@ -40,10 +47,12 @@
 					<option value="0" <?= ($perfil->getStatus() == 0 ? 'selected' : '') ?>>Inativo</option>
 				</select>
 			</div>
+			<?php if(($permissoes['insert'] && $perfil->getId() == '') || ($permissoes['update'] && $perfil->getId() != '')): ?>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Salvar</button>
 				<button type="reset" class="btn btn-warning">Resetar</button>
 			</div>
+			<?php endif; ?>
 		</form>
 	</div>
 <?php if($perfil->getId() != ''): 
@@ -51,6 +60,7 @@
 	require 'classes/ControleDAO.php';
 	require 'classes/Permissao.php'; 
 	require 'classes/PermissaoDAO.php';
+	$permissoesPermissao = retornaControle('permissao');
 
 	$controleDAO = new ControleDAO();
 	$controles = $controleDAO->listar();
@@ -60,6 +70,7 @@
 	<div class="col-6">
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>
+		<?php if(!empty($permissoesPermissao)): ?>
 		<div class="card">
 			<div class="card-header">
 				Cadastro de permissões
@@ -100,7 +111,7 @@
 				</form>
 			</div>
 		</div>
-
+		<?php endif; ?>
 		<div class="card">
 				<div class="card-header">
 					Permissões cadastradas
@@ -135,9 +146,11 @@
 									: ''
 ) ?>					</td>
 							<td>
+								<?php if(!empty($permissoesPermissao)): ?>
 								<a href="controle_perfil.php?acao=deletaPermissao&id_permissao=<?= $permissao->getId(); ?>&id_perfil=<?= $perfil->getId(); ?>" class="btn btn-outline-danger" onclick="return confirm('Deseja realmente excluir?')">
 									<i class="fas fa-trash"></i>
 								</a>
+								<?php endif; ?>
 							</td>
 						</tr>
 						<?php endforeach; ?>

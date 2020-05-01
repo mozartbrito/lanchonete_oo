@@ -1,6 +1,10 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
 <?php 
+	$permissoes = retornaControle('controle');
+	if(empty($permissoes)) {
+		header("Location: adminstrativa.php?msg=Acesso negado.");
+	}
 	require 'classes/Controle.php'; 
 	require 'classes/ControleDAO.php';
 	$controle = new Controle();
@@ -16,9 +20,11 @@
 	<div class="col-6 offset-3">
 		<h2>Cadastrar controle</h2>
 	</div>
+	<?php if($permissoes['insert']): ?>
 	<div class="col-2">
 		<a href="form_controle.php" class="btn btn-success">Novo controle</a>
 	</div>
+	<?php endif; ?>
 </div>
 
 <div class="row">
@@ -47,10 +53,12 @@
 					<option value="0" <?= ($controle->getStatus() == 0 ? 'selected' : '') ?>>Inativo</option>
 				</select>
 			</div>
+			<?php if(($permissoes['insert'] && $controle->getId() == '') || ($permissoes['update'] && $controle->getId() != '')): ?>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Salvar</button>
 				<button type="reset" class="btn btn-warning">Resetar</button>
 			</div>
+			<?php endif; ?>
 		</form>
 	</div>
 </div>

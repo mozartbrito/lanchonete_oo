@@ -1,6 +1,10 @@
 <?php include './layout/header.php'; ?>
 <?php include './layout/menu.php'; ?>
 <?php 
+	$permissoes = retornaControle('usuario');
+	if(empty($permissoes)) {
+		header("Location: administrativa.php?msg=Acesso negado.");
+	}
 	require 'classes/Usuario.php'; 
 	require 'classes/UsuarioDAO.php';
 	require 'classes/Perfil.php'; 
@@ -14,20 +18,20 @@
 		$usuarioDAO = new UsuarioDAO();
 		$usuario = $usuarioDAO->get($id);
 	}
-
-?>
-<?php 
-	if(isset($_GET['msg']) && $_GET['msg'] != '') {
-	 echo '<div class="alert alert-info">'.$_GET['msg'].'</div>';
+	if(empty($usuario)) {
+		header("Location: usuarios.php?msg=Usuário não encontrado.");
 	}
+
 ?>
 <div class="row" style="margin-top:40px">
 	<div class="col-6 offset-3">
 		<h2>Cadastrar usuario</h2>
 	</div>
+	<?php if($permissoes['insert']): ?>
 	<div class="col-2">
 		<a href="form_usuario.php" class="btn btn-success">Novo usuário</a>
 	</div>
+	<?php endif; ?>
 </div>
 
 <form action="controle_usuario.php?acao=<?= ( $usuario->getId() != '' ? 'editar' : 'cadastrar' )?>" method="post" enctype="multipart/form-data">
@@ -76,9 +80,13 @@
 					<?php endforeach; ?>
 					</select>
 				</div>
+				<?php if(($permissoes['insert'] && $usuario->getId() == '') 
+						|| ($permissoes['update'] && $usuario->getId() != '') 
+						 || ($_SESSION['id_usuario'] == $usuario->getId())): ?>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary w-100">Salvar</button>
 				</div>
+				<?php endif; ?>
 		</div>
 	</div>
 </form>

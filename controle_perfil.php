@@ -1,5 +1,12 @@
 <?php
-if(!isset($_SESSION['id_perfil'])) session_start();
+require_once './includes/validacao.php';
+require_once './includes/funcoes.php';
+$permissoes = retornaControle('perfil');
+$permissoesPermissao = retornaControle('permissao');
+
+if(empty($permissoes)) {
+	header("Location: adminstrativa.php?msg=Acesso negado.");
+}
 require 'classes/Perfil.php';
 require 'classes/PerfilDAO.php';
 
@@ -12,14 +19,14 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 	$id = $_GET['id'];
 }
 
-if($acao == 'deletar') {
+if($acao == 'deletar' && $permissoes['delete']) {
 
 	$perfilDAO->deletar($id);
 	$msg = 'Perfil excluído com sucesso';
 
 	header("Location: perfis.php?msg=$msg");
 
-} else if($acao == 'cadastrar') {
+} else if($acao == 'cadastrar' && $permissoes['insert']) {
 
 	$perfil->setDescricao($_POST['descricao']);
 	$perfil->setStatus($_POST['status']);
@@ -28,7 +35,7 @@ if($acao == 'deletar') {
 
 	header("Location: form_perfil.php?id=$id_perfil&msg=$msg");
 
-} else if($acao == 'editar') {
+} else if($acao == 'editar' && $permissoes['update']) {
 	$id_perfil = $_POST['id'];
 
 	$perfil->setId($_POST['id']);
@@ -38,7 +45,7 @@ if($acao == 'deletar') {
 	$msg = 'Perfil alterado com sucesso';
 	
 	header("Location: form_perfil.php?id=$id_perfil&msg=$msg");
-} else if($acao == 'cadastraPermissao') {
+} else if($acao == 'cadastraPermissao' && !empty($permissoesPermissao)) {
 
 	require 'classes/Permissao.php';
 	require 'classes/PermissaoDAO.php';
@@ -75,7 +82,7 @@ if($acao == 'deletar') {
 
 	header("Location: form_perfil.php?id=$id_perfil&msg=$msg");
 
-} else if($acao == 'deletaPermissao') {
+} else if($acao == 'deletaPermissao' && !empty($permissoesPermissao)) {
 	require 'classes/Permissao.php';
 	require 'classes/PermissaoDAO.php';
 
@@ -96,4 +103,8 @@ if($acao == 'deletar') {
 	$msg = 'Permissão excluída com sucesso';
 
 	header("Location: form_perfil.php?id=$id_perfil&msg=$msg");
+} else {
+	$msg = 'Não possui permissão.';
+
+	header("Location: perfis.php?msg=$msg");
 }

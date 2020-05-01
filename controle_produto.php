@@ -1,10 +1,19 @@
-<?php 
+<?php
+require_once './includes/validacao.php';
+require_once './includes/funcoes.php'; 
 require 'classes/Produto.php';
 require 'classes/Categoria.php';
 require 'classes/Imagem.php';
 require 'classes/ProdutoDAO.php';
 require 'classes/ImagemDAO.php';
 require 'classes/CategoriaDAO.php';
+
+$permissoes = retornaControle('produto');
+$permissoesImagem = retornaControle('removeImagemProduto');
+
+if(empty($permissoes)) {
+	header("Location: adminstrativa.php?msg=Acesso negado.");
+}
 
 $produto = new Produto();
 $produtoDAO = new ProdutoDAO();
@@ -16,13 +25,13 @@ if(isset($_GET['id']) && $_GET['id'] != '') {
 	$id = $_GET['id'];
 }
 
-if($acao == 'deletar') {
+if($acao == 'deletar' && $permissoes['delete']) {
 
 	$produtoDAO->deletar($id);
 	$msg = 'Produto excluído com sucesso';
 	header("Location: produtos.php?msg=$msg");
 
-} else if($acao == 'cadastrar') {
+} else if($acao == 'cadastrar' && $permissoes['insert']) {
 
 	$categoria = $categoriaDAO->get($_POST['categoria']);
 
@@ -36,7 +45,7 @@ if($acao == 'deletar') {
 	$msg = 'Produto cadastrado com sucesso';
 	header("Location: form_produto.php?id=$id&msg=$msg");
 
-} else if($acao == 'editar') {
+} else if($acao == 'editar' && $permissoes['update']) {
 	$id = $_POST['id'];
 	$categoria = $categoriaDAO->get($_POST['categoria']);
 
@@ -53,7 +62,7 @@ if($acao == 'deletar') {
 
 	header("Location: form_produto.php?id=$id&msg=$msg");
 	
-} else if($acao == 'cadastraImagens') {
+} else if($acao == 'cadastraImagens' && !empty($permissoesImagem)) {
 
 	$produto_id = $_POST['produto_id'];
 	/**
@@ -114,5 +123,8 @@ if($acao == 'deletar') {
 	$msg = "Imagens cadastradas com sucesso.";
 	header("Location: form_produto.php?id=$produto_id&msg=$msg");
 
+} else {
+	$meg = 'Não possui permissão';
+	header("Location: produtos.php?msg=$msg");
 }
 
