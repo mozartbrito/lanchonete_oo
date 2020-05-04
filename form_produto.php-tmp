@@ -1,4 +1,6 @@
 <?php include './layout/header.php';?>
+<link rel="stylesheet" href="./assets/js/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="./assets/js/assets/owl.theme.default.min.css">
 <?php include './layout/menu.php';?>
 <?php
 $permissoes = retornaControle('produto');
@@ -126,9 +128,9 @@ if (!empty($permissoesImagens)):
 				<div class="card-header">
 					Imagens cadastradas
 				</div>
-				<div class="card-body">
+				<div class="card-body owl-carousel owl-theme">
 <?php foreach ($imagens as $imagem):?>
-						<img src="<?=$imagem->getCaminho();?>" class="img-thumbnail" width="150px">
+						<img src="<?=$imagem->getCaminho();?>" class="img-thumbnail item" width="150px">
 <?php endforeach;?>
 </div>
 			</div>
@@ -137,3 +139,22 @@ if (!empty($permissoesImagens)):
 </div>
 
 <?php include './layout/footer.php';?>
+<script src="./assets/js/owl.carousel.js"></script>
+<script type="text/javascript">
+	$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+})
+</script>
