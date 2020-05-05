@@ -1,6 +1,9 @@
 body {
 	background: #f1f1f1;
 }
+.conteudo {
+	margin-top: 70px;
+}
 .row {
 	margin-bottom: 15px;
 }
@@ -50,4 +53,7 @@ img.item {
 .owl-dots {
 	position: relative;
     top: -120px;
+}
+.card-body.owl-carousel {
+	max-height: 370px;
 }

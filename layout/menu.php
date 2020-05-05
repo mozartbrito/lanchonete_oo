@@ -3,7 +3,7 @@
   $permissaoPerfilMenu = retornaControle('perfil');
   $permissaoControleMenu = retornaControle('controle');
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     
   
@@ -66,7 +66,7 @@
   </div>
   </div>
 </nav>
-<div class="container">
+<div class="container conteudo">
   <?php 
   if(isset($_GET['msg']) && $_GET['msg'] != '') {
    echo '<div class="alert alert-info">'.$_GET['msg'].'</div>';
