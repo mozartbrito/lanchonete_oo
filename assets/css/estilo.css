@@ -38,6 +38,7 @@ body {
 }
 img.item {
 	max-height: 315px;
+	object-fit: cover;
 }
 .owl-next, .owl-prev {
 	font-size: 70px !important;

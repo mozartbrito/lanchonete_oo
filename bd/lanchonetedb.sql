@@ -26,7 +26,7 @@ CREATE TABLE `categorias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Lanches'),(2,'Bebidas'),(13,'Alimentos'),(14,'Eletroportáteis'),(16,'Laticinio');
+INSERT INTO `categorias` VALUES (1,'Lanches'),(2,'Bebidas'),(13,'Alimentos'),(14,'Eletroportáteis kkkkkk burlei');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `clientes` (
   `estado` char(2) DEFAULT NULL,
   `imagem` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Daniel Lagos Souza','833.333.890-96','1996-10-02','Masculino','danielcliente@email.com',NULL,'(61) 99999-9999','71750-000','Núcleo Rural Vargem Bonita','4','Setor de chacaras','Núcleo Rural Vargem Bonita (Park Way)','Brasília','DF','noite-20200424230417.jpg'),(2,'Maria Madalena','006.437.970-17','1988-05-28','Feminino','mariamadalena@email.com',NULL,'(61) 98686-7878',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'Mozart Teixeira de Brito','949.494.646-45','2010-10-10','Masculino','mozart.contato@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','(64) 65465-4646','72583-300','Rua 500 Lote 502','','5454','Setor Meireles (Santa Maria)','Brasília','DF','mozart-brito-20200424010419.jpg');
+INSERT INTO `clientes` VALUES (1,'Daniel Lagos Souza','833.333.890-96','1996-10-02','Masculino','danielcliente@email.com',NULL,'(61) 99999-9999','71750-000','Núcleo Rural Vargem Bonita','4','Setor de chacaras','Núcleo Rural Vargem Bonita (Park Way)','Brasília','DF','noite-20200424230417.jpg'),(2,'Maria Madalena','006.437.970-17','1988-05-28','Feminino','mariamadalena@email.com',NULL,'(61) 98686-7878',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'Mozart Teixeira de Brito','949.494.646-45','2010-10-10','Masculino','mozart.contato@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','(64) 65465-4646','72583-300','Rua 500 Lote 502','','5454','Setor Meireles (Santa Maria)','Brasília','DF','34153790_1SZ-20200504230528.jpg');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `controles` (
   `status` char(1) NOT NULL DEFAULT '1',
   `tipo` enum('Administrativo','Front') DEFAULT 'Administrativo',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `controles` (
 
 LOCK TABLES `controles` WRITE;
 /*!40000 ALTER TABLE `controles` DISABLE KEYS */;
-INSERT INTO `controles` VALUES (1,'cliente','1','Administrativo'),(2,'usuario','1','Administrativo'),(3,'perfil','1','Administrativo'),(4,'categoria','1','Administrativo'),(5,'produto','1','Administrativo'),(6,'venda','1','Administrativo'),(7,'estoque','1','Administrativo');
+INSERT INTO `controles` VALUES (1,'cliente','1','Administrativo'),(2,'usuario','1','Administrativo'),(3,'perfil','1','Administrativo'),(4,'categoria','1','Administrativo'),(5,'produto','1','Administrativo'),(6,'venda','1','Administrativo'),(7,'estoque','1','Administrativo'),(9,'removeImagemCliente','1','Administrativo'),(10,'removeImagemUsuario','1','Administrativo'),(11,'imagensProduto','1','Administrativo'),(12,'controle','1','Administrativo'),(13,'permissao','1','Administrativo');
 /*!40000 ALTER TABLE `controles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `imagens` (
   PRIMARY KEY (`id`),
   KEY `fk_produto_imagem_idx` (`produto_id`),
   CONSTRAINT `fk_produto_imagem` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `perfis` (
   `descricao` varchar(45) NOT NULL COMMENT 'Esta tabela armazenará todos os perfis que o sistema possa necessitar.',
   `status` char(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `permissoes` (
   KEY `fk_permissoes_perfis1_idx` (`perfil_id`),
   CONSTRAINT `fk_permissoes_controles1` FOREIGN KEY (`controle_id`) REFERENCES `controles` (`id`),
   CONSTRAINT `fk_permissoes_perfis1` FOREIGN KEY (`perfil_id`) REFERENCES `perfis` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `permissoes` (
 
 LOCK TABLES `permissoes` WRITE;
 /*!40000 ALTER TABLE `permissoes` DISABLE KEYS */;
-INSERT INTO `permissoes` VALUES (1,1,1,'1','1','1','1','1'),(2,3,1,'1','1','1','1','1'),(5,5,3,'1','0','1','1','1'),(6,4,1,'1','1','1','1','1'),(9,5,1,'1','1','1','1','1'),(10,2,1,'1','1','1','1','1'),(12,2,3,'0','0','1','0','1'),(13,1,3,'1','0','1','1','1'),(14,4,3,'1','0','1','1','1'),(18,1,4,'1','0','0','0','1'),(19,5,4,'1','0','0','0','1'),(20,6,1,'1','1','1','1','1'),(21,7,1,'1','1','1','1','1'),(22,7,3,'1','0','1','1','1'),(23,6,3,'1','0','1','0','1'),(24,6,4,'1','0','0','0','1'),(25,7,4,'1','0','0','0','1'),(37,4,4,'1','0','0','0','1');
+INSERT INTO `permissoes` VALUES (1,1,1,'1','1','1','1','1'),(2,3,1,'1','1','1','1','1'),(5,5,3,'1','0','1','1','1'),(6,4,1,'1','1','1','1','1'),(9,5,1,'1','1','1','1','1'),(10,2,1,'1','1','1','1','1'),(12,2,3,'0','0','1','0','1'),(14,4,3,'1','0','1','1','1'),(18,1,4,'1','0','0','0','1'),(19,5,4,'1','0','0','0','1'),(20,6,1,'1','1','1','1','1'),(21,7,1,'1','1','1','1','1'),(22,7,3,'1','0','1','1','1'),(23,6,3,'1','0','1','0','1'),(24,6,4,'1','0','0','0','1'),(25,7,4,'1','0','0','0','1'),(42,4,4,'1','0','0','0','1'),(43,9,1,'1','1','1','1','1'),(44,10,1,'1','1','1','1','1'),(45,9,3,'1','1','1','1','1'),(46,11,1,'1','1','1','1','1'),(47,11,3,'1','1','1','1','1'),(48,2,4,'1','0','0','0','1'),(49,12,1,'1','1','1','1','1'),(50,13,1,'1','1','1','1','1'),(52,1,3,'1','0','1','1','1');
 /*!40000 ALTER TABLE `permissoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (3,'Refrigerante',5.00,2,15,'sadfasdf'),(4,'Coca Lata',4.50,2,4,'Cola lata de 350ml'),(5,'Burguer Duplo',19.90,1,0,'2 hamburgueres de carne com 180g cada uma;\r\nAlface;\r\nTomate;\r\nMussarela;\r\nCebola;'),(6,'Contra filé',25.90,13,20,'Contra filé com arroz branco, feijão tropeiro e vinagrete'),(7,'Hot Dog',12.00,1,15,'Completo na chapa, com milho, ervilha, queijo mussarela, bacon.');
+INSERT INTO `produtos` VALUES (3,'Refrigerante',5.00,2,15,'sadfasdf'),(4,'Coca Lata',4.50,2,4,'Cola lata de 350ml'),(5,'Burguer Duplo',19.90,1,15,'2 hamburgueres de carne com 180g cada uma;\r\nAlface;\r\nTomate;\r\nMussarela;\r\nCebola;'),(6,'Contra filé',25.90,13,20,'Contra filé com arroz branco, feijão tropeiro e vinagrete'),(7,'Hot Dog',12.00,1,15,'Completo na chapa, com milho, ervilha, queijo mussarela, bacon.');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (3,'Juan Pablo','juan@email.com','81dc9bdb52d04dc20036dbd8313ed055','Juan Pablo-20200420230428.jpg',4),(4,'Guilherme','guilherme@email.com','81dc9bdb52d04dc20036dbd8313ed055','WhatsApp-icone-20200420230427.png',3),(5,'Lucas','lucas@email.com','81dc9bdb52d04dc20036dbd8313ed055','images-20200423000443.jpg',1);
+INSERT INTO `usuarios` VALUES (3,'Juan Pablo 2','juan@email.com','81dc9bdb52d04dc20036dbd8313ed055','Juan Pablo-20200420230428.jpg',4),(4,'Guilherme','guilherme@email.com','81dc9bdb52d04dc20036dbd8313ed055','WhatsApp-icone-20200420230427.png',3),(5,'Lucas','lucas@email.com','81dc9bdb52d04dc20036dbd8313ed055','images-20200423000443.jpg',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `vendas` (
   PRIMARY KEY (`id`),
   KEY `fk_cliente_idx` (`cliente_id`),
   CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `vendas_produtos` (
   KEY `fk_venda_idx` (`venda_id`),
   CONSTRAINT `fk_produto` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`),
   CONSTRAINT `fk_venda` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-29 22:28:30
+-- Dump completed on 2020-05-05 21:02:20
