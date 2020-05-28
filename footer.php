@@ -1,0 +1,69 @@
+    <footer id="contato">
+      <div class="container">
+        <form action="" method="post" accept-charset="utf-8">
+        <div class="row contato">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="nome">Nome:</label>
+                  <input type="text" name="nome" id="nome" value="" class="form-control" placeholder="Informe seu nome" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">E-mail:</label>
+                  <input type="email" name="email" id="email" value="" class="form-control" placeholder="Informe seu e-mail de contato" required>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="mensagem">Mensagem:</label>
+                  <textarea name="mensagem" id="mensagem" class="form-control" rows="5" placeholder="Digite sua mensagem ou dúvida" required></textarea>
+                </div>
+              </div>
+              <div class="col-12 text-right">
+                <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+              </div>                    
+        </div>
+        </form>
+        <div class="row">
+          <div class="col text-center direitos">
+            <p>&copy;Direitos reservados <?php echo date('Y'); ?> | SENAC DF</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+ 
+<?php
+include_once('modal.php');
+?>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function($) {
+        $('#range_valor').on('change', function() {
+            let valor_range = $(this).val();
+            $('#qtd').val(valor_range);
+            calculaCompra(valor_range);
+            
+        });
+        $('#qtd').on('change', function() {
+            let valor_range = $(this).val();
+            $('#range_valor').val(valor_range);
+            calculaCompra(valor_range);
+            
+        });
+
+        function calculaCompra(valor) {
+            let valor_range = valor;
+            let valor_unidade = $('#valor_unidade').val();
+            let valor_total = valor_range * valor_unidade;
+            $('#preco').html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+        }
+        //$('#qtd').val($(this).val());$('#valor_total').html($(this).val() * $())
+      });
+    </script>
+  </body>
+</html>

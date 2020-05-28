@@ -1,0 +1,60 @@
+body {
+	background: #f1f1f1;
+}
+.conteudo {
+	margin-top: 110px;
+}
+.row {
+	margin-bottom: 15px;
+}
+.user-img-menu {
+	width: 30px; 
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.msg-error-form {
+	color: #c0392b;
+    font-weight: bold;
+    font-size: 12px;
+    display: none;
+}
+.total {
+	text-align: center;
+	font-size: 50px;
+	font-weight: bold;
+	color:  #27ae60;
+}
+.total.finalizadas {
+	color:  #3498db;
+}
+.total.pendente {
+	color:  #e74c3c;
+}
+.card-dashboard {
+	padding: 0;
+}
+#produtos_categoria, #vendas_status {
+	height: 250px;
+}
+img.item {
+	max-height: 315px;
+	object-fit: cover;
+}
+.owl-next, .owl-prev {
+	font-size: 70px !important;
+	position: relative;
+    top: -235px;
+}
+.owl-prev {
+	left: -210px;
+}
+.owl-next {
+	left: 210px;
+}
+.owl-dots {
+	position: relative;
+    top: -120px;
+}
+.card-body.owl-carousel {
+	max-height: 370px;
+}
