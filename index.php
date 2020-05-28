@@ -2,6 +2,17 @@
 include_once('header.php');
 include_once('menu.php');
 include_once('slides.php');
+
+include_once('admin/classes/Produto.php');
+include_once('admin/classes/ProdutoDAO.php');
+require 'admin/classes/Categoria.php';
+require 'admin/classes/CategoriaDAO.php';
+require 'admin/classes/Imagem.php';
+require 'admin/classes/ImagemDAO.php';
+
+$produtoDAO = new ProdutoDAO();
+$produtos = $produtoDAO->listar();
+$categoriaDAO = new CategoriaDAO();
 ?>
 <main class="container">
       <div class="row titulo-cardapio" id="titulo-cardapio">
@@ -25,8 +36,10 @@ include_once('slides.php');
         </div>
       </div>
       <div class="row lista-produtos">
-        <?php $qtd = 13; ?>
-      <?php for ($i = 0; $i < $qtd; $i++) : ?>
+        <?php $qtd = count($produtos); ?>
+      <?php foreach ($produtos as $produto) : 
+          $categoria = $categoriaDAO->get($produto->getCategoria());
+          ?>
         <!-- conteudo do produto -->
         <div class="col-md-4 col-sm-6 col-xs-12">
           <article class="produto produto-principal">
@@ -34,10 +47,11 @@ include_once('slides.php');
               <img src="/assets/img/produtos/produto1.png" alt="">
             </figure>
             <div class="descricao-produto">
-              <h3>Duplo Bacon</h3>
-              <p>Com salada, queijo chedar, molho especial, cebola</p>
+              <h3><?= $produto->getNome(); ?></h3>
+              <span class="badge badge-pill badge-info"><?= $categoria->getNome(); ?></span>
+              <p><?= $produto->getDescricao(); ?></p>
               <span class="preco">
-                R$ 19,90
+                R$ <?= $produto->getPreco(); ?>
               </span>
               <button type="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCompra">
                 COMPRAR
@@ -46,7 +60,7 @@ include_once('slides.php');
           </article>
         </div>
         <!-- /conteudo do produto -->
-      <?php endfor; ?>
+      <?php endforeach; ?>
       
       <?php if($qtd < 1) { ?>
         <span class="alert alert-info col-12 text-center" style="height: 60px;">

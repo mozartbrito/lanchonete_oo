@@ -30,7 +30,11 @@
         </div>
       </div>
     </footer>
-
+<div id="btnScroll">
+  <a href="#header" class="scroll">
+    <i class="fas fa-arrow-circle-up"></i>
+  </a>
+</div>
  
 <?php
 include_once('modal.php');
@@ -63,6 +67,29 @@ include_once('modal.php');
             $('#preco').html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
         }
         //$('#qtd').val($(this).val());$('#valor_total').html($(this).val() * $())
+
+        $('#btnScroll').css('display', 'none');
+
+        $(window).scroll(function() {
+          if($(this).scrollTop() > 350){
+            $('#btnScroll').fadeIn();
+          } else {
+            $('#btnScroll').fadeOut();
+          }
+        });
+
+
+        var scrollLink = $('.scroll');
+
+        // Smooth scrolling
+        scrollLink.click(function(e) {
+        e.preventDefault();
+        $('body,html').animate({
+          scrollTop: $(this.hash).offset().top
+        }, 1000 );
+        });
+
+
       });
     </script>
   </body>

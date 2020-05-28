@@ -16,7 +16,7 @@
               <div class="collapse navbar-collapse col-md-9 offset-3 menu-principal" id="conteudoNavbarSuportado">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="index.php#titulo-cardapio">CARDÁPIO <span class="sr-only">(página atual)</span></a>
+                    <a class="nav-link " href="index.php#titulo-cardapio">CARDÁPIO <span class="sr-only">(página atual)</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="sobre.php">SOBRE</a>
@@ -25,7 +25,7 @@
                     <a class="nav-link" href="entregas.php">ENTREGAS</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#contato">CONTATO</a>
+                    <a class="nav-link scroll" href="#contato">CONTATO</a>
                   </li>
                   <li class="nav-item menu-login">
                     <a class="nav-link" href="#">LOGIN</a>

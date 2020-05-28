@@ -10,5 +10,6 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css" >
 	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/all.css">
+	<link rel="icon" href="/assets/img/favicon.png" sizes="32x32" type="image/png">
 </head>
 <body>
