@@ -33,6 +33,13 @@ Direitos reservados <?php echo date('Y');
       </div>
     </footer>
 <div id="btnScroll">
+  <a href="#" data-toggle="modal" data-target="#modalFinaliza">
+    <i class="fas fa-shopping-bag sacola"></i>
+    <span class="badge badge-pill badge-danger num-pedidos">
+<?=isset($_SESSION['compras'])?count($_SESSION['compras']):0?>
+</span>
+  </a>
+  <br>
   <a href="#header" class="scroll">
     <i class="fas fa-arrow-circle-up"></i>
   </a>
@@ -48,8 +55,8 @@ include_once ('modal.php');
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script>
-      $(document).ready(function($) {
-        $('#range_valor').on('change', function() {
+      //$(document).ready(function($) {
+        /*$('#range_valor').on('change', function() {
             let valor_range = $(this).val();
             $('#qtd').val(valor_range);
             calculaCompra(valor_range);
@@ -60,15 +67,34 @@ include_once ('modal.php');
             $('#range_valor').val(valor_range);
             calculaCompra(valor_range);
 
-        });
+        });*/
 
-        function calculaCompra(valor) {
+        function alteraValor(tipo, valor, id_produto) {
+          var name_range = '#range_valor' + id_produto;
+          var name_qtd = '#qtd' + id_produto;
+          if(tipo == 'range') {
             let valor_range = valor;
-            let valor_unidade = $('#valor_unidade').val();
-            let valor_total = valor_range * valor_unidade;
-            $('#preco').html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+            $(name_qtd).val(valor_range);
+            calculaCompra(valor_range, id_produto);
+          } else if(tipo == 'qtd') {
+            let valor_range = valor;
+            $(name_range).val(valor_range);
+            calculaCompra(valor_range, id_produto);
+          }
         }
-        //$('#qtd').val($(this).val());$('#valor_total').html($(this).val() * $())
+
+        function calculaCompra(valor, id_produto) {
+            let name_unidade = '#valor_unidade' + id_produto;
+            let name_preco = '#preco' + id_produto;
+            let valor_range = valor;
+            let valor_unidade = $(name_unidade).val();
+            let valor_total = valor_range * valor_unidade;
+            $(name_preco).html(valor_total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+        }
+
+        function filtraCategoria(id_categoria) {
+          window.location.href = "index.php?categoria=" + id_categoria + "#titulo-cardapio";
+        }
 
         $('#btnScroll').css('display', 'none');
 
@@ -92,7 +118,7 @@ include_once ('modal.php');
         });
 
 
-      });
+      //});
     </script>
   </body>
 </html>

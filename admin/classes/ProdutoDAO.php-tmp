@@ -40,5 +40,21 @@ class ProdutoDAO extends Model {
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+	public function filtrar($condicao = '') {
+		$where = '';
+		if ($condicao != '') {
+			$where = " WHERE {$condicao}";
+		}
+		$sql = "SELECT p.*, c.nome as nome_categoria FROM {$this->tabela}p
+                LEFT JOIN categorias c ON p.categoria = c.id
+{$where}";
+		//echo $sql;
+		exit;
+
+		$stmt = $this->db->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 
 }

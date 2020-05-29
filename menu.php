@@ -36,7 +36,9 @@
                  <li class="nav-item">
                     <a class="nav-link bag-pedido" href="#" data-toggle="modal" data-target="#modalFinaliza">
                       <i class="fas fa-shopping-bag"></i>
-                      <span class="badge badge-pill badge-danger num-pedidos">3</span>
+                      <span class="badge badge-pill badge-danger num-pedidos">
+                        <?= isset($_SESSION['compras']) ? count($_SESSION['compras']) : 0 ?>
+                      </span>
                     </a>
                   </li>
                 </ul>

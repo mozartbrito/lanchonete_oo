@@ -10,6 +10,13 @@ h1 {
     bottom: 10px;
     right: 20px;
     opacity: 0.7;
+    text-decoration: none;
+}
+#btnScroll a {
+    text-decoration: none;
+}
+#btnScroll i.sacola {
+    color:  #f6b23b;
 }
 #btnScroll:hover {
     opacity: 1;
@@ -18,6 +25,12 @@ h1 {
 	font-size: 50px;
 	font-weight: bold;
 	color:  #6c3428;
+}
+#btnScroll .num-pedidos {
+	font-size: 14px;
+	position: relative;
+    top: -25px;
+    left: -25px;
 }
 p {
 	text-align: justify;

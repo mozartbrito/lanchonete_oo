@@ -9,7 +9,7 @@ require 'classes/ImagemDAO.php';
 require 'classes/CategoriaDAO.php';
 
 $permissoes = retornaControle('produto');
-$permissoesImagem = retornaControle('removeImagemProduto');
+$permissoesImagem = retornaControle('imagensProduto');
 
 if(empty($permissoes)) {
 	header("Location: adminstrativa.php?msg=Acesso negado.");
@@ -21,6 +21,7 @@ $categoriaDAO = new CategoriaDAO();
 
 $acao = $_GET['acao'];
 $id = '';
+
 if(isset($_GET['id']) && $_GET['id'] != '') {
 	$id = $_GET['id'];
 }
