@@ -64,4 +64,14 @@ class ClienteDAO extends Model {
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+	public function getLogin($email, $senha) {
+		$sql = "SELECT c.* FROM {$this->tabela} c
+                WHERE email = :email AND senha = :senha";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(':email', $email);
+		$stmt->bindParam(':senha', $senha);
+		$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 }

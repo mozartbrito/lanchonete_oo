@@ -27,9 +27,6 @@
                   <li class="nav-item">
                     <a class="nav-link scroll" href="#contato">CONTATO</a>
                   </li>
-                  <li class="nav-item menu-login">
-                    <a class="nav-link" href="#">LOGIN</a>
-                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#" id="menu-meu-pedido" data-toggle="modal" data-target="#modalFinaliza">MEU PEDIDO</a>
                   </li>
@@ -41,6 +38,29 @@
                       </span>
                     </a>
                   </li>
+                    <?php 
+                      if(isset($_SESSION['perfil'])) {
+                     ?>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                          <span data-toggle="tooltip" title="<?= $_SESSION['nome'];  ?>"><?= substr(strtoupper($_SESSION['nome']),0,4); ?>...</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="perfil.php">MEU PERFIL</a>
+                          <a class="dropdown-item" href="#">ACOMPANHAR</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="logout.php">SAIR</a>
+                        </div>
+                    </li>
+
+
+                     <!--  <a class="nav-link" href="perfil.php" data-toggle="tooltip" title="<?= $_SESSION['nome'];  ?> - Acessar perfil"><?= substr(strtoupper($_SESSION['nome']),0,4); ?>...</a> -->
+                      <!-- <a class="nav-link" href="logout.php">SAIR</a> -->
+                   <?php }else { ?>
+                  <li class="nav-item menu-login">
+                      <a class="nav-link" href="login.php">LOGIN</a>
+                  </li>
+                   <?php } ?>
                 </ul>
               </div>
             </div>

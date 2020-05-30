@@ -54,6 +54,7 @@ include_once ('modal.php');
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/admin/assets/js/jquery.maskedinput.min.js" ></script>
     <script>
       //$(document).ready(function($) {
         /*$('#range_valor').on('change', function() {
@@ -68,6 +69,20 @@ include_once ('modal.php');
             calculaCompra(valor_range);
 
         });*/
+        $(function() {
+          $('.moeda').maskMoney({
+              decimal: ",",
+              thousands: "."
+          });
+        });
+        $('.telefone').mask("(99) 99999-9999");
+        $('.cep').mask("99999-999");
+        $('.cpf').mask("999.999.999-99");
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+
 
         function alteraValor(tipo, valor, id_produto) {
           var name_range = '#range_valor' + id_produto;

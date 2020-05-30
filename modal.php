@@ -22,6 +22,7 @@
                 </tr>
                 <?php $total = 0;
                 $n = 1;
+                if(isset($_SESSION['compras'])) {
                 foreach ($_SESSION['compras'] as $key => $compra) : ?>
                 <tr>
                   <td>#<?= $n; ?></td>
@@ -30,7 +31,7 @@
                   <td><?= $compra['qtd_produto']; ?></td>
                   <td>R$ <?= number_format(($compra['qtd_produto'] * $compra['val_produto']),2,',','.'); ?></td>
                   <td>
-                    <a href="adiciona_produto.php?acao=removerItem&key=<?= $key; ?>" class="btn btn-sm btn-danger">
+                    <a href="adiciona_produto.php?acao=removerItem&key=<?= $key; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Deseja remover o item da sacola?')">
                       <i class="fas fa-trash"></i>
                     </a>
                   </td>
@@ -38,7 +39,8 @@
                 <?php
                   $n++; 
                   $total += ($compra['qtd_produto'] * $compra['val_produto']);
-                endforeach; ?>
+                endforeach;
+                } ?>
                 <tr>
                   <th colspan="3" class="text-right">Total</th>
                   <th colspan="3" class="text-left">R$ <?= number_format($total,2,',','.') ?></th>
@@ -47,7 +49,16 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <a class="btn btn-primary" href="finaliza_compra.php">Finalizar compra</a>
+              <?php 
+                if(!isset($_SESSION['perfil'])) {
+                    $msg =  'Você não está logado, por favor inicie uma sessão.';
+                  ?>
+                    <a class="btn btn-primary" href="login.php?tipo=finaliza&msg=<?= $msg ?>">Finalizar compra</a>
+                  <?php
+                    } else if(isset($_SESSION['perfil'])) {
+                  ?>
+                  <a class="btn btn-primary" href="finaliza_compra.php">Finalizar compra</a>
+                <?php } ?>
             </div>
           </div>
         </div>

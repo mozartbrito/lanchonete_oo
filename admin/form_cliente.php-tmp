@@ -27,7 +27,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 <form action="controle_cliente.php?acao=<?=($cliente->getId() != ''?'editar':'cadastrar')?>" method="post" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-3 text-center">
-			<img src="/assets/img/clientes/<?=($cliente->getImagem() != '' && file_exists('assets/img/clientes/'.$cliente->getImagem())?$cliente->getImagem():'usuario.png')?>" alt="" width="150" class="rounded-circle img-thumbnail" id="fotopreview">
+			<img src="./assets/img/clientes/<?=($cliente->getImagem() != '' && file_exists('assets/img/clientes/'.$cliente->getImagem())?$cliente->getImagem():'usuario.png')?>" alt="" width="150" class="rounded-circle img-thumbnail" id="fotopreview">
 			<br>
 			<br>
 			<div class="custom-file">

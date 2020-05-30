@@ -5,6 +5,14 @@ h1 {
 	font-weight: bold;
 	color:  #6c3428;
 }
+h3 {
+	font-weight: bold;
+	color:  #6c3428;
+
+}
+button h3 {
+	text-decoration: none !important;
+}
 #btnScroll {
 	position: fixed;
     bottom: 10px;
@@ -140,4 +148,13 @@ footer {
 }
 .sobre {
 	margin-top: 100px;
+}
+#msg-cep {
+	display: none;
+}
+.msg-error-form {
+	color: #c0392b;
+    font-weight: bold;
+    font-size: 12px;
+    display: none;
 }

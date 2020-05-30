@@ -1,17 +1,24 @@
 <?php 
 session_start();
-//unset($_SESSION['compras']);
-function pesquisaRecursiva($valor, $array) {
+
+function addItem($item, $array) {
 	if(is_array($array)) {
-		foreach($array as $arr) {
-			$tem_produto = in_array($valor, $arr);
-			if($tem_produto) {
-				return $tem_produto;
+		if(!empty($array)) {
+			foreach($array as $key => $arr) {
+				if($arr['produto_id'] == $item['produto_id']) {
+					$nova_qtd = $item['qtd_produto'] + $arr['qtd_produto'];
+					$_SESSION['compras'][$key]['qtd_produto'] = $nova_qtd;
+				} else {
+					$_SESSION['compras'][] = $item;
+				}
 			}
+		} else {
+			$_SESSION['compras'][] = $item;
 		}
 	}
 }
-
+/*print_r($_POST);
+print_r($_SESSION['compras']);*/
 if(isset($_GET['acao']) && $_GET['acao'] == 'removerItem') {
 	$key = $_GET['key'];
 	unset($_SESSION['compras'][$key]);
@@ -21,6 +28,7 @@ if(isset($_GET['acao']) && $_GET['acao'] == 'removerItem') {
 	if(!isset($_SESSION['compras'])) {
 		$_SESSION['compras'] = [];
 	}
+
 	$item = [];
 	$item['produto_id'] = $_POST['produto'];
 	$item['nome_produto'] = $_POST['nome_produto'];
@@ -28,12 +36,9 @@ if(isset($_GET['acao']) && $_GET['acao'] == 'removerItem') {
 	$item['qtd_produto'] = $_POST['qtd'];
 	$item['val_produto'] = $_POST['val'];
 
-	$tem_produto = pesquisaRecursiva($item['produto_id'], $_SESSION['compras']); //exit;
-	if(!$tem_produto) {
-		$_SESSION['compras'][] = $item;
-	}
+	addItem($item, $_SESSION['compras']); //exit;
 	$msg = "Produto adicionado a sacola com sucesso!";
 }
-header("Location: index.php?msg=$msg")
+header("Location: index.php?msg=$msg");
 
 ?>
