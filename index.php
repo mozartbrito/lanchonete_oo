@@ -157,14 +157,14 @@ $categorias = $categoriaDAO->listar();
                           R$ <?= $produto->getPreco(); ?>
                         </span>
                           <form class="form-inline my-2 my-lg-0" method="post" action="adiciona_produto.php">
-                            <input type="hidden" name="produto" value="<?= $produto->getId(); ?>">
-                            <input type="hidden" name="nome_produto" value="<?= $produto->getNome(); ?>">
-                            <input type="hidden" name="preco_produto" value="<?= $produto->getPreco(); ?>">
+                            <input type="hidden" name="produto" id="produto<?= $produto->getId(); ?>" value="<?= $produto->getId(); ?>">
+                            <input type="hidden" name="nome_produto" id="nome_produto<?= $produto->getId(); ?>" value="<?= $produto->getNome(); ?>">
+                            <input type="hidden" name="preco_produto" id="preco_produto<?= $produto->getId(); ?>" value="<?= $produto->getPreco(); ?>">
                             <input type="hidden" name="val" value="<?= $produto->getPrecoBD(); ?>" id="valor_unidade<?= $produto->getId(); ?>">
                             <input class="form-control-range mr-sm-2" id="range_valor<?= $produto->getId(); ?>" type="range" placeholder="Quantidade" aria-label="Quantidade" min="1" max="10" value="1" required onchange="alteraValor('range',$(this).val(),<?= $produto->getId(); ?>)">
                             <br>
                             <input type="number" id="qtd<?= $produto->getId(); ?>" name="qtd" value="1" class="form-control mr-sm-0" min="1" onchange="alteraValor('qtd',$(this).val(),<?= $produto->getId(); ?>)">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                            <button class="btn btn-primary my-2 my-sm-0" onclick="AddItem(<?= $produto->getId(); ?>); return false;">
                               Adicionar
                             </button>
                           </form>

@@ -21,7 +21,15 @@ if(empty($cliente)) {
 } else {
 	$_SESSION['nome'] = $cliente->getNome();
 	$_SESSION['email'] = $cliente->getEmail();
+	$_SESSION['telefone'] = $cliente->getCelular();
 	$_SESSION['imagem'] = $cliente->getImagem();
+	$_SESSION['cep'] = $cliente->getCep();
+	$_SESSION['logradouro'] = $cliente->getLogradouro();
+	$_SESSION['bairro'] = $cliente->getBairro();
+	$_SESSION['cidade'] = $cliente->getCidade();
+	$_SESSION['estado'] = $cliente->getEstado();
+	$_SESSION['numero'] = $cliente->getNumero();
+	$_SESSION['complemento'] = $cliente->getComplemento();
 	$_SESSION['id_cliente'] = $cliente->getId();
 	$_SESSION['perfil'] = 'Cliente';
 

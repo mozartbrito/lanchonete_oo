@@ -79,6 +79,10 @@ class Venda
     {
         return $this->data_venda;
     }
+    public function getDataVendaBD()
+    {
+        return $this->data_venda;
+    }
 
     /**
      * @param mixed $data_venda
@@ -116,6 +120,10 @@ class Venda
      * @return mixed
      */
     public function getDataFinalizacao()
+    {
+        return $this->data_finalizacao;
+    }
+    public function getDataFinalizacaoBD()
     {
         return $this->data_finalizacao;
     }
@@ -159,6 +167,10 @@ class Venda
     {
         return $this->data_pagamento;
     }
+    public function getDataPagamentoBD()
+    {
+        return $this->data_pagamento;
+    }
 
     /**
      * @param mixed $data_pagamento
@@ -185,9 +197,9 @@ class Venda
      *
      * @return self
      */
-    public function setProdutos(Produto $produtos[])
+    public function setProdutos(Produto $produtos)
     {
-        $this->produtos = $produtos;
+        $this->produtos[] = $produtos;
 
         return $this;
     }

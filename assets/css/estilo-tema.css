@@ -158,3 +158,9 @@ footer {
     font-size: 12px;
     display: none;
 }
+.qtd_itens {
+	border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: bold;
+}

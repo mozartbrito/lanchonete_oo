@@ -67,12 +67,12 @@ include_once('modal.php');
             calculaCompra(valor_range);
             
         });*/
-        $(function() {
+        /*$(function() {
           $('.moeda').maskMoney({
               decimal: ",",
               thousands: "."
           });
-        });
+        });*/
         $('.telefone').mask("(99) 99999-9999");
         $('.cep').mask("99999-999");
         $('.cpf').mask("999.999.999-99");
@@ -130,6 +130,81 @@ include_once('modal.php');
         }, 1000 );
         });
 
+      function atualizaPedidos() {
+        $.ajax({
+          url: 'tabela_pedidos.php',
+          type: 'GET',
+          beforeSend: function() {
+
+          },
+          success: function(resultado) {
+            $('#tabela_pedido').html(resultado);
+            $('#tabela_pedidos_modal').html(resultado);
+          }
+        });
+        
+      }
+
+      function excluiItem(id_item) {
+        if (confirm('Deseja remover o item da sacola?')) {
+          $.ajax({
+            url: 'adiciona_produto.php?acao=removerItemAjax&key=' + id_item,
+            type: 'GET',
+            beforeSend: function() {
+
+            },
+            success: function(resultado) {
+              atualizaPedidos();
+              $('.num-pedidos').html(resultado);
+              /*$('.num-pedidos').html(<?= isset($_SESSION['compras']) ? count($_SESSION['compras']) - 1 : 0 ?>);*/
+            }
+          })
+          
+        }
+      }
+      function AddRemoveItem(id_item, new_qtd) {
+        $.ajax({
+          url: 'adiciona_produto.php?acao=AlteraItemAjax&key=' + id_item + '&qtd=' + new_qtd,
+            type: 'GET',
+            beforeSend: function() {
+
+            },
+            success: function(resultado) {
+              atualizaPedidos();
+            }
+        })
+        
+      }
+
+      function AddItem(id_produto) {
+        let produto = $('#produto' + id_produto).val();
+        let nome_produto = $('#nome_produto' + id_produto).val();
+        let preco_produto = $('#preco_produto' + id_produto).val();
+        let qtd = $('#qtd' + id_produto).val();
+        let valor_unidade = $('#valor_unidade' + id_produto).val();
+       /* alert(id_produto +' - ' + preco_produto +' - ' + nome_produto+' - ' + qtd+' - ' + valor_unidade)*/
+
+        $.ajax({
+          url: 'adiciona_produto.php?acao=AddItemAjax',
+          type: 'POST',
+          data: {
+            produto: id_produto,
+            nome_produto: nome_produto,
+            preco_produto: preco_produto,
+            qtd: qtd,
+            val: valor_unidade
+          },
+          beforeSend: function() {
+
+          },
+          success: function(resultado) {
+            atualizaPedidos();
+            $('.num-pedidos').html(resultado);
+            $('.close').click();
+          }
+        })
+        
+      }
 
       //});
     </script>
