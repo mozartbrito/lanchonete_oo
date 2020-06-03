@@ -1,6 +1,5 @@
 <?php
 include_once('header.php');
-include_once('menu.php');
 
 if(!isset($_SESSION['perfil']) && $_SESSION['perfil'] == '') {
 	$msg = 'Usuário não efetuou login.';
@@ -54,6 +53,8 @@ exit;*/
  $msg = 'Compra finalizada com sucesso';
  header("Location: index.php?msg=$msg");
  exit;
+
+include_once('menu.php');
 
 ?>
 <main class="container sobre">
