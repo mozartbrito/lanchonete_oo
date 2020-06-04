@@ -164,4 +164,11 @@ footer {
     border-radius: 7px;
     font-weight: bold;
 }
-
+.alertas, .alertas_ajax {
+	width: 500px;
+	position: fixed;
+	top:  15px;
+	right: 200px;
+	display: none;
+	z-index: 1060;
+}

@@ -3,7 +3,8 @@ session_start();
 
 if(!isset($_SESSION['perfil']) && $_SESSION['perfil'] == '') {
 	$msg = 'Usuário não efetuou login.';
-	header("Location: login.php?msg=$msg");
+	$alert = 'danger';
+	header("Location: login.php?msg=$msg&alert=$alert");
 } 
 
 if(isset($_GET['tipo'])) {
@@ -21,7 +22,8 @@ $clienteDAO = new ClienteDAO();
 //validando campos obrigatórios
 if($_POST['nome'] || $_POST['email'] || $_POST['senha']) {
 	$msg = 'Nome, email e senha são obrigatórios.';
-	header("Location: login.php?tipo=$tipo&msg=$msg");
+	$alert = 'danger';
+	header("Location: login.php?tipo=$tipo&msg=$msg&alert=$alert");
 }
 
 $cliente->setNome($_POST['nome']);
@@ -56,8 +58,9 @@ $_SESSION['id_cliente'] = $id_cliente;
 $_SESSION['perfil'] = 'Cliente';
 
 $msg = 'Cliente salva com sucesso!';
+$alert = 'success';
 if($tipo != 'logar') {
-	header("Location: finaliza_compra.php?msg=$msg");
+	header("Location: finaliza_compra.php?msg=$msg&alert=$alert");
 }else {
-	header("Location: index.php?msg=$msg");
+	header("Location: index.php?msg=$msg&alert=$alert");
 }

@@ -17,7 +17,8 @@ if(isset($_GET['tipo'])) {
 
 if(empty($cliente)) {
 	$msg = 'Cliente não encontrado';
-	header("Location: index.php?msg=$msg");
+	$alert = 'danger';
+	header("Location: login.php?msg=$msg&alert=$alert&tipo=$tipo");
 } else {
 	$_SESSION['nome'] = $cliente->getNome();
 	$_SESSION['email'] = $cliente->getEmail();
@@ -34,10 +35,11 @@ if(empty($cliente)) {
 	$_SESSION['perfil'] = 'Cliente';
 
 	$msg = 'Cliente logado com sucesso!';
+	$alert = 'success';
 	if($tipo != 'logar') {
-		header("Location: finaliza_compra.php?msg=$msg");
+		header("Location: finaliza_compra.php?msg=$msg&alert=$alert");
 	}else {
-		header("Location: index.php?msg=$msg");
+		header("Location: index.php?msg=$msg&alert=$alert");
 	}
 }
 ?>

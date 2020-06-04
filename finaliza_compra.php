@@ -9,7 +9,8 @@ if(isset($_GET['tipo'])) {
 
 if(!isset($_SESSION['perfil']) && $_SESSION['perfil'] == '') {
 	$msg = 'Usuário não efetuou login.';
-	header("Location: login.php?msg=$msg");
+	$alert = 'danger';
+	header("Location: login.php?msg=$msg&alert=$alert");
 } 
 ?>
 <main class="container sobre">

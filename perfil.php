@@ -3,7 +3,8 @@ include_once('header.php');
 
 if(!isset($_SESSION['perfil']) && $_SESSION['perfil'] == '') {
 	$msg = 'Usuário não efetuou login.';
-	header("Location: login.php?msg=$msg");
+	$alert = 'danger';
+	header("Location: login.php?msg=$msg&alert=$alert");
 } 
 include_once('menu.php');
 

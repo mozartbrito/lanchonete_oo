@@ -68,10 +68,6 @@ if (isset($_GET['acao']) && $_GET['acao'] == 'removerItemAjax') {
 	$item['val_produto']   = $_POST['val'];
 
 	addItem($item, $_SESSION['compras']);
-	/*print_r($_SESSION['compras']);
-	exit;*/
 	echo isset($_SESSION['compras'])?count($_SESSION['compras']):0;
 }
-//header("Location: index.php?msg=$msg");
-
 ?>

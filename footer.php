@@ -30,6 +30,24 @@
         </div>
       </div>
     </footer>
+      <div class="alertas alert alert-<?php echo (isset($_GET['alert']) ? $_GET['alert'] : 'info') ?> alert-dismissible fade show" role="alert">
+          <?php if(isset($_GET['msg'])): 
+            echo $_GET['msg'];
+           endif; ?>
+
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="alerta_ajax" class="alertas_ajax alert alert-success alert-dismissible fade show" role="alert">
+          mensagem
+
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
 <div id="btnScroll">
   <a href="#" data-toggle="modal" data-target="#modalFinaliza">
     <i class="fas fa-shopping-bag sacola"></i>
@@ -80,7 +98,14 @@ include_once('modal.php');
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
         });
-  
+        
+        <?php if(isset($_GET['msg'])): ?>
+          $('.alertas').show();
+          setTimeout(function(){
+            $('.alertas').fadeOut();
+            window.history.pushState("", "", window.location.pathname);
+          }, 3000);
+        <?php endif; ?>
 
         function alteraValor(tipo, valor, id_produto) {
           var name_range = '#range_valor' + id_produto;
@@ -145,6 +170,14 @@ include_once('modal.php');
         
       }
 
+      function exibeAlerta(mensagem) {
+        $('#alerta_ajax').html(mensagem);
+        $('#alerta_ajax').fadeIn();
+          setTimeout(function(){
+            $('#alerta_ajax').fadeOut();
+            window.history.pushState("", "", window.location.pathname);
+          }, 3000);
+      }
       function excluiItem(id_item) {
         if (confirm('Deseja remover o item da sacola?')) {
           $.ajax({
@@ -155,6 +188,7 @@ include_once('modal.php');
             },
             success: function(resultado) {
               atualizaPedidos();
+              exibeAlerta('Item excluído com sucesso!');
               $('.num-pedidos').html(resultado);
               /*$('.num-pedidos').html(<?= isset($_SESSION['compras']) ? count($_SESSION['compras']) - 1 : 0 ?>);*/
             }
@@ -171,6 +205,7 @@ include_once('modal.php');
             },
             success: function(resultado) {
               atualizaPedidos();
+              exibeAlerta('Quantidade alterada com sucesso!');
             }
         })
         
@@ -182,7 +217,6 @@ include_once('modal.php');
         let preco_produto = $('#preco_produto' + id_produto).val();
         let qtd = $('#qtd' + id_produto).val();
         let valor_unidade = $('#valor_unidade' + id_produto).val();
-       /* alert(id_produto +' - ' + preco_produto +' - ' + nome_produto+' - ' + qtd+' - ' + valor_unidade)*/
 
         $.ajax({
           url: 'adiciona_produto.php?acao=AddItemAjax',
@@ -199,6 +233,7 @@ include_once('modal.php');
           },
           success: function(resultado) {
             atualizaPedidos();
+            exibeAlerta('Item adicionado com sucesso!');
             $('.num-pedidos').html(resultado);
             $('.close').click();
           }
