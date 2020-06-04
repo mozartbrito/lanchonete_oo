@@ -59,5 +59,22 @@ class VendaDAO extends Model {
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+	public function listaVendasCliente($condicao) {
+		$where = '';
+		if ($condicao != '') {
+			$where = " WHERE {$condicao}";
+		}
+		$sql = "SELECT v.id, v.codigo,v.data_venda, v.forma_pagamento, v.status
+                FROM {$this->tabela}v
+{$where}
+                ORDER BY id DESC";
+		//echo $sql;
+		exit;
+
+		$stmt = $this->db->prepare($sql);
+		$stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 
 }

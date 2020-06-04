@@ -1,6 +1,6 @@
     <footer id="contato">
       <div class="container">
-        <form action="" method="post" accept-charset="utf-8">
+        <form action="envia_contato.php" method="post" accept-charset="utf-8">
         <div class="row contato">
               <div class="col-6">
                 <div class="form-group">

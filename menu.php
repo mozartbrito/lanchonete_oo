@@ -47,7 +47,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="perfil.php">MEU PERFIL</a>
-                          <a class="dropdown-item" href="#">ACOMPANHAR</a>
+                          <a class="dropdown-item" href="acompanhar.php">ACOMPANHAR</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="logout.php">SAIR</a>
                         </div>

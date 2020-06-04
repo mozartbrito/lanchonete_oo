@@ -69,7 +69,12 @@ class Venda {
 	 * @return mixed
 	 */
 	public function getDataVenda() {
-		return $this->data_venda;
+		if ($this->data_venda != '') {
+			$data      = explode('-', $this->data_venda);
+			$nova_data = substr($data[2], 0, 2).'/'.$data[1].'/'.$data[0];
+			return $nova_data;
+		}
+		return '';
 	}
 	public function getDataVendaBD() {
 		return $this->data_venda;
@@ -108,7 +113,12 @@ class Venda {
 	 * @return mixed
 	 */
 	public function getDataFinalizacao() {
-		return $this->data_finalizacao;
+		if ($this->data_finalizacao != '') {
+			$data      = explode('-', $this->data_finalizacao);
+			$nova_data = substr($data[2], 0, 2).'/'.$data[1].'/'.$data[0];
+			return $nova_data;
+		}
+		return '';
 	}
 	public function getDataFinalizacaoBD() {
 		return $this->data_finalizacao;
@@ -147,7 +157,12 @@ class Venda {
 	 * @return mixed
 	 */
 	public function getDataPagamento() {
-		return $this->data_pagamento;
+		if ($this->data_pagamento != '') {
+			$data      = explode('-', $this->data_pagamento);
+			$nova_data = substr($data[2], 0, 2).'/'.$data[1].'/'.$data[0];
+			return $nova_data;
+		}
+		return '';
 	}
 	public function getDataPagamentoBD() {
 		return $this->data_pagamento;

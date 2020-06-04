@@ -59,5 +59,19 @@ class VendaProdutoDAO extends Model
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function listaProdutoCliente($venda_id)
+    {
+        $sql = "SELECT v.produto_id, v.valor, v.qtd, p.nome 
+                FROM {$this->tabela} v
+                LEFT JOIN produtos p ON p.id = v.produto_id
+                WHERE venda_id = '{$venda_id}'";
+                //echo $sql; exit;
+
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
 }
