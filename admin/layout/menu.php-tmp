@@ -22,6 +22,11 @@ $permissaoControleMenu = retornaControle('controle');
         <a class="nav-link" href="administrativa.php">Início <span class="sr-only">(página atual)</span></a>
       </li>
       <li class="nav-item ">
+        <a class="nav-link" href="vendas.php" id="navbarDropdown" role="button" >
+          Vendas
+        </a>
+      </li>
+      <li class="nav-item ">
         <a class="nav-link" href="produtos.php" id="navbarDropdown" role="button" >
           Produtos
         </a>

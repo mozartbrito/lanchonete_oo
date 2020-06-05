@@ -73,5 +73,11 @@ class VendaProdutoDAO extends Model
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function deletarProdutosVendas($id_venda)
+    {
+        $sql = "DELETE FROM {$this->tabela} WHERE venda_id = {$id_venda}";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+    }
 
 }
