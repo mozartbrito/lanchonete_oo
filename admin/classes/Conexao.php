@@ -18,7 +18,11 @@ class Conexao
 			$conn = new PDO(
 							$this->host,
 							$this->user, 
-							$this->password
+							$this->password,
+							array(
+								PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+								PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+							)
 						);
 
 			return $conn;
