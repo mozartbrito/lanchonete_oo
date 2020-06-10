@@ -35,7 +35,7 @@
 <div class="row">
 	<div class="col-6 <?= ( $produto->getId() != '' ? '' : 'offset-3' )?>">
 		<p>&nbsp;</p>
-		<form action="/admin/controle_produto.php?acao=<?= ( $produto->getId() != '' ? 'editar' : 'cadastrar' )?>" method="post">
+		<form action="controle_produto.php?acao=<?= ( $produto->getId() != '' ? 'editar' : 'cadastrar' )?>" method="post">
 			<div class="row">
 				<div class="col-3">
 					<div class="form-group">
@@ -111,7 +111,7 @@
 					Imagens
 				</div>
 				<div class="card-body">
-					<form action="/admin/controle_produto.php?acao=cadastraImagens" method="post" enctype="multipart/form-data">
+					<form action="controle_produto.php?acao=cadastraImagens" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="produto_id" value="<?= $produto->getId();  ?>">
 						<div class="custom-file">
 						  <input type="file" class="custom-file-input" name="imagens[]" id="imagens" multiple>
