@@ -118,13 +118,13 @@ endforeach;?>
 $n = 0;
 foreach ($imagens as $imagem):?>
                               <div class="carousel-item <?php echo ($n == 0?'active':'')?>">
-                                <img class="d-block w-100" src="/admin/<?=$imagem->getCaminho();?>" alt="Primeiro Slide">
+                                <img class="d-block w-100" src="./admin/<?=$imagem->getCaminho();?>" alt="Primeiro Slide">
                               </div>
 <?php
 $n++;
 endforeach;
 
-if (!isset($imagens[0]) || !file_exists('admin/'.$imagens[0]->getCaminho())) {
+if (!isset($imagens[0]) || !file_exists('./admin/'.$imagens[0]->getCaminho())) {
 	$capa = './assets/img/produtos/default.png';
 	?>
 	<div class="carousel-item active">
