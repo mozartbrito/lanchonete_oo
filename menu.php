@@ -9,7 +9,7 @@
               </button>
               <div class="col-md-3 text-center" id="logo-menu">
                 <a href="index.php"><figure>
-                                  <img src="/assets/img/logo.png" class="img-fluid" width="213" alt="Logo" title="Logo Grécia Burger">
+                                  <img src="./assets/img/logo.png" class="img-fluid" width="213" alt="Logo" title="Logo Grécia Burger">
                                   
                                 </figure></a>
               </div>
