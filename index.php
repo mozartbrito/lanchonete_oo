@@ -64,9 +64,9 @@ $categorias = $categoriaDAO->listar();
           $imagens = $imagemDAO->listarPorProduto($produto->getId());
 
           if(isset($imagens[0]) && file_exists('admin/'.$imagens[0]->getCaminho())) {
-            $capa = '/admin/'.$imagens[0]->getCaminho();
+            $capa = './admin/'.$imagens[0]->getCaminho();
           } else {
-            $capa = 'assets/img/produtos/default.png';
+            $capa = './assets/img/produtos/default.png';
           }
       ?>
         <!-- conteudo do produto -->
@@ -126,10 +126,10 @@ $categorias = $categoriaDAO->listar();
                             endforeach; 
 
                             if(!isset($imagens[0]) || !file_exists('admin/'.$imagens[0]->getCaminho())) {
-                              $capa = 'assets/img/produtos/default.png';
+                              $capa = './assets/img/produtos/default.png';
                             ?>
                               <div class="carousel-item active">
-                                  <img class="d-block w-100" src="assets/img/produtos/default.png" alt="Primeiro Slide">
+                                  <img class="d-block w-100" src="./assets/img/produtos/default.png" alt="Primeiro Slide">
                               </div>
                             
 
