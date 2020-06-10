@@ -41,7 +41,7 @@ if (isset($_GET['msg']) && $_GET['msg'] != '') {
 				<strong >Área restrita</strong>
 			</div>
 			<div class="card-body">
-				<form action="admin/login.php" method="post">
+				<form action="login.php" method="post">
 					<div class="form-group row">
 						<input type="email" name="email" id="email" class="form-control" required onfocus="this.removeAttribute('readonly');" readonly autofocus placeholder="E-mail">
 					</div>
