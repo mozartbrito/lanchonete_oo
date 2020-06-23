@@ -33,4 +33,12 @@ class ImagemDAO extends Model
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function listarUmaImagemPorProduto($produto_id)
+    {
+        $sql = "SELECT * FROM {$this->tabela} WHERE produto_id = {$produto_id} LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $this->class);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
